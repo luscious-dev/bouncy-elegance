@@ -1,0 +1,259 @@
+.hero {
+  height: 90vh;
+  background-image: linear-gradient(
+      to bottom right,
+      rgba(#f4c2c2, 0.8),
+      rgba(#ffff, 0.8)
+    ),
+    url("../img/hero-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    // padding: 13rem 0rem;
+    padding-top: 13rem;
+    padding-bottom: 13rem;
+  }
+
+  &__text-box {
+    flex: 0 0 55%;
+  }
+
+  &__primary {
+    margin-bottom: 33px;
+  }
+
+  &__description {
+    margin-bottom: 4rem;
+  }
+
+  &__img-box {
+    flex: 0 0 35%;
+  }
+
+  &__img {
+    width: 100%;
+    margin-top: -30px;
+  }
+}
+
+.products-section {
+  background-color: var(--color-grey-light-1);
+  padding: 8rem 0;
+  position: relative;
+  .products {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+
+    &__badge {
+      // padding: 100px;
+      background-color: var(--color-primary);
+      position: absolute;
+      border-radius: 50%;
+      // width: 20%;
+      height: 200px;
+      width: 200px;
+      top: 79px;
+      right: 156px;
+      transform: scale(0.7);
+      transition: transform 0.4s ease-in-out;
+
+      &:hover {
+        transform: scale(1.5);
+      }
+
+      .badge__content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        text-align: center;
+        color: var(--color-light);
+        font-family: "Poppins", sans-serif;
+
+        h2 {
+          margin-bottom: 1rem;
+        }
+      }
+
+      ul {
+        list-style: none;
+        font-size: 1.2rem;
+      }
+    }
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--color-light);
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 1rem 3rem rgba($color-dark, 0.3);
+
+      .field {
+        font-weight: bold;
+        color: var(--color-primary);
+      }
+    }
+
+    &__image {
+      // flex: 0 0 25%;
+      // height: 140px;
+
+      img {
+        // height: 100%;
+        width: 100%;
+      }
+    }
+
+    &__description {
+      padding: 15px 20px;
+      font-family: "Poppins", sans-serif;
+      font-size: 1.8rem;
+
+      ul {
+        list-style-type: none;
+      }
+    }
+  }
+}
+
+.quote-section {
+  padding: 8rem 0;
+  background-color: var(--color-grey-light-1);
+  .quotation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    blockquote {
+      margin-bottom: 5rem;
+    }
+    // Text half
+    &__text {
+      max-width: 50%;
+      font-family: "Poppins", sans-serif;
+
+      p {
+        font-size: 3.7rem;
+        font-weight: 400;
+      }
+    }
+
+    &__footer {
+      margin-top: 6rem;
+    }
+
+    &__attribution {
+      font-size: 2.6rem;
+      font-weight: 600;
+
+      &--title {
+        font-size: 2rem;
+        font-weight: 300;
+        font-style: italic;
+      }
+    }
+
+    // Image half
+    &__image {
+      max-width: 515px;
+
+      figure,
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.reviews-section {
+  background-color: var(--color-primary);
+  padding: 8rem 0;
+
+  h2:first-of-type {
+    color: var(--color-light);
+  }
+
+  .reviews-grid {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .review {
+    background-color: var(--color-light);
+    padding: 3rem;
+    font-family: "Poppins", sans-serif;
+    border-radius: 5px;
+    transition: all 0.3s ease-in;
+
+    &:not(:last-child) {
+      margin-right: 5rem;
+    }
+
+    &__name {
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--color-primary);
+      margin-bottom: 1.3rem;
+    }
+    span.faded {
+      font-size: 1.6rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--color-dark);
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    &__message {
+      font-size: 2rem;
+    }
+
+    &:hover {
+      transform: translateY(-1rem);
+      box-shadow: 0 2rem 3rem rgba(black, 0.2);
+    }
+  }
+}
+
+.blog-section {
+  padding: 8rem 0;
+  background-color: var(--color-grey-light-1);
+
+  .preview-image {
+    flex: 0 0 60%;
+    max-width: 585px;
+    margin-right: 3rem;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .preview-blog-posts {
+    flex: 0 1 550px;
+  }
+
+  .blog-post {
+    font-family: "Poppins", sans-serif;
+    padding: 35px 0;
+
+    &:not(:last-child) {
+      border-bottom: 2px solid var(--color-dark);
+    }
+
+    &__title {
+      font-size: 2.3rem;
+    }
+
+    &__link {
+      color: var(--color-primary);
+      font-size: 1.8rem;
+    }
+  }
+}

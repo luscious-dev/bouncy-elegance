@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;1,200;1,400;1,500;1,600;1,700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap");
+
+a {
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.hero__primary {
+  font-family: "Poppins", sans-serif;
+  font-size: 6.4rem;
+  line-height: 1;
+  color: var(--color-light);
+}
+
+.hero__description {
+  font-size: 2.3rem;
+  color: var(--color-light);
+  font-family: "Noto Serif", serif;
+  line-height: 1.6;
+}
+.heading {
+  font-family: "Poppins", sans-serif;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.heading--primary {
+  font-size: 4.3rem;
+  margin-bottom: 2rem;
+  color: var(--color-dark);
+}
+
+.heading--secondary {
+  font-size: 3.6rem;
+  margin-bottom: 2rem;
+}
+
+.heading-description--primary {
+  font-size: 2rem;
+  font-family: "Noto Serif", serif;
+  color: var(--color-dark);
+}
+
+.text--small {
+  font-size: 1.6rem;
+}
+
+.text--medium {
+  font-size: 2rem;
+}
+
+.text--big {
+  font-size: 2.5rem;
+}
+
+.paragraph-centered {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
+}
