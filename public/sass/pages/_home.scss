@@ -19,6 +19,14 @@
 
   &__text-box {
     flex: 0 0 55%;
+
+    @include breakpoint-down(700px) {
+      flex: 1;
+    }
+
+    @include breakpoint-down(700px) {
+      text-align: center;
+    }
   }
 
   &__primary {
@@ -31,6 +39,10 @@
 
   &__img-box {
     flex: 0 0 35%;
+
+    @include breakpoint-down(700px) {
+      display: none;
+    }
   }
 
   &__img {

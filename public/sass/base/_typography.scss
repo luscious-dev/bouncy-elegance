@@ -12,6 +12,18 @@ a {
   font-size: 6.4rem;
   line-height: 1;
   color: var(--color-light);
+
+  @include breakpoint-down(930px) {
+    font-size: 6rem;
+  }
+
+  @include breakpoint-down(800px) {
+    font-size: 5.5rem;
+  }
+  @include breakpoint-down(700px) {
+    font-size: 5rem;
+    text-align: center;
+  }
 }
 
 .hero__description {

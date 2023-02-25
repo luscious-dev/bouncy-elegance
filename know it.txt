@@ -1,0 +1,6 @@
+What is user-centered design?
+Relelant articles in the field of software development supporting the approach and methodology og the project.
+
+What are the benefits and limitations of Agile and user-centered methodologies
+
+What are the best practices for secure coding and testing?

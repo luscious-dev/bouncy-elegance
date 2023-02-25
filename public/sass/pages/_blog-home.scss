@@ -1,0 +1,21 @@
+.banner {
+  background-color: var(--color-secondary);
+
+  &__image {
+    background-color: var(--color-primary);
+    padding: 5vw;
+    flex: 0 0 40%;
+  }
+
+  img {
+    width: calc(100% + 10vw);
+  }
+
+  &__text {
+    padding-left: 10vw;
+  }
+
+  &__text-content {
+    margin-top: -4rem;
+  }
+}

@@ -7,11 +7,21 @@
 
   &__nav {
     display: flex;
-    gap: 7.5rem;
+    justify-content: space-between;
     list-style: none;
+
+    @include breakpoint-down(700px) {
+      display: none;
+    }
   }
 
   &__item {
+  }
+
+  &__accounts {
+    @include breakpoint-down(700px) {
+      display: none;
+    }
   }
 
   &__link {

@@ -1,5 +1,6 @@
 const app = require("./app");
 const dotenv = require("dotenv");
+
 dotenv.config({ path: `${__dirname}/config.env` });
 
 // /api/v1/users
@@ -7,6 +8,8 @@ dotenv.config({ path: `${__dirname}/config.env` });
 // /api/v1/users/:id
 
 // /api/v1/blog/posts
+
+// /api/v1/blog/posts/new
 
 // /api/v1/blog/posts/:id
 
