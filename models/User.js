@@ -30,6 +30,7 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "You have to set a password"],
     minlength: 8,
+    select: false,
   },
   passwordConfirm: {
     type: String,
@@ -42,6 +43,10 @@ const UserSchema = new Schema({
     },
   },
 });
+
+UserSchema.methods.correctPassword = async (currentPassword, sentPassword) => {
+  return await bcrypt.compare(sentPassword, currentPassword);
+};
 
 UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
