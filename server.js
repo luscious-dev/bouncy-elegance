@@ -13,7 +13,7 @@ process.on("uncaughtException", (err) => {
 
 mongoose.set("strictQuery", true);
 mongoose
-  .connect("mongodb://127.0.0.1:27017/BouncyElegance")
+  .connect(process.env.DB_LOCAL)
   .then((res) => {
     console.log("MONGO CONNECTION SUCCESSFUL");
   })
