@@ -3,7 +3,7 @@ const BlogPost = require("./models/BlogPosts");
 
 mongoose.set("strictQuery", true);
 mongoose
-  .connect("mongodb://localhost:27017/BouncyElegance")
+  .connect("mongodb://127.0.0.1:27017/BouncyElegance")
   .then((res) => {
     console.log("MONGO CONNECTION SUCCESSFUL");
   })
@@ -72,3 +72,5 @@ for (let i = 0; i < 11; i++) {
       console.log("Error saving", err);
     });
 }
+
+process.exit(0);

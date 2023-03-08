@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 mongoose
-  .connect("mongodb://localhost:27017/BouncyElegance")
+  .connect("mongodb://127.0.0.1:27017/BouncyElegance")
   .then((res) => {
     console.log("MONGO CONNECTION SUCCESSFUL");
   })
