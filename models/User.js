@@ -26,6 +26,14 @@ const UserSchema = new Schema({
     maxLength: 300,
     trim: true,
   },
+  role: {
+    type: String,
+    enum: {
+      values: ["user", "admin", "guest"],
+      message: "This is not a valid role",
+    },
+    default: "user",
+  },
   password: {
     type: String,
     required: [true, "You have to set a password"],
@@ -42,10 +50,30 @@ const UserSchema = new Schema({
       message: "Your password don't match",
     },
   },
+
+  changedPasswordAt: {
+    type: Date,
+  },
 });
 
 UserSchema.methods.correctPassword = async (currentPassword, sentPassword) => {
   return await bcrypt.compare(sentPassword, currentPassword);
+};
+
+UserSchema.methods.changedPasswordAfter = function (tokenIssuedTime) {
+  if (!this.changedPasswordAt) return false;
+
+  const changedPasswordAtSecs = parseInt(
+    this.changedPasswordAt.getTime() / 1000
+  );
+  // console.log(changedPasswordAtSecs, tokenIssuedTime);
+  // console.log(changedPasswordAtSecs > tokenIssuedTime);
+
+  if (changedPasswordAtSecs > tokenIssuedTime) {
+    return true;
+  }
+
+  return false;
 };
 
 UserSchema.pre("save", async function (next) {

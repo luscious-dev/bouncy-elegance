@@ -1,7 +1,9 @@
+const util = require("util");
+const jwt = require("jsonwebtoken");
+
 const catchAsync = require("../utils/catchAsync");
 const User = require("../models/User");
 const AppError = require("../utils/appError");
-const jwt = require("jsonwebtoken");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET);
@@ -39,4 +41,50 @@ exports.login = catchAsync(async (req, res, next) => {
     status: "success",
     token: signToken(currentUser._id),
   });
+});
+
+exports.protect = catchAsync(async (req, res, next) => {
+  let token;
+
+  // 1. See if a token is available
+  if (
+    !req.headers.authorization ||
+    !req.headers.authorization.startsWith("Bearer")
+  ) {
+    return next(
+      new AppError("You are not logged in. Log in and try again!", 401)
+    );
+  }
+
+  token = req.headers.authorization.split(" ")[1];
+
+  // 2. Verify token
+  const decoded = await util.promisify(jwt.verify)(
+    token,
+    process.env.JWT_SECRET
+  );
+
+  // 3. Check if user still exists
+  const currentUser = await User.findById(decoded.id);
+
+  if (!currentUser) {
+    return next(
+      new AppError("The user belonging to this token no longer exists", 401)
+    );
+  }
+
+  // 4. Chech if password has not been changed since the last log in
+  console.log(currentUser.changedPasswordAfter(decoded.iat));
+  if (currentUser.changedPasswordAfter(decoded.iat)) {
+    return next(
+      new AppError(
+        "Your password has been changed in you last logged in. Log in again!",
+        401
+      )
+    );
+  }
+
+  console.log(decoded);
+
+  next();
 });

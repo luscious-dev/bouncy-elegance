@@ -3,6 +3,7 @@ const AppError = require("../utils/appError");
 const handleDevError = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
+    message: err.message,
     error: err,
   });
 };
@@ -45,7 +46,7 @@ module.exports = (err, req, res, next) => {
   err.status = err.status || "error";
 
   if (process.env.NODE_ENV == "development") {
-    console.log(err);
+    console.log(err.message);
     handleDevError(err, res);
   } else if (process.env.NODE_ENV == "production") {
     if (err.name == "CastError") err = handleCastErrorDB(err);

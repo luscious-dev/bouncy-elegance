@@ -1,6 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const blogControllers = require("../controllers/blogController");
+const authController = require("../controllers/authController");
 
 router.get("/posts", blogControllers.getAllPosts);
 
