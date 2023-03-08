@@ -4,6 +4,7 @@ const BlogPostLikes = require("../models/BlogPostLikes");
 const BlogPostVisits = require("../models/BlogPostVisits");
 
 const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appError");
 
 exports.getAllPosts = catchAsync(async (req, res) => {
   const features = new APIFeatures(BlogPosts.find(), req.query);
@@ -11,6 +12,7 @@ exports.getAllPosts = catchAsync(async (req, res) => {
 
   // features.query;
   const posts = await features.query;
+
   res.status(200).json({
     status: "Success",
     length: posts.length,
@@ -22,6 +24,9 @@ exports.getAllPosts = catchAsync(async (req, res) => {
 
 exports.getPost = catchAsync(async (req, res) => {
   const post = await BlogPosts.findById(req.params.id);
+  if(!post){
+    throw new AppError("No post available with that ID", 404)
+  }
   res.status(200).json({
     status: "success",
     data: {
@@ -46,7 +51,9 @@ exports.updateBlogPost = catchAsync(async (req, res) => {
     runValidators: true,
     new: true,
   });
-
+  if(!blogPost){
+    throw new AppError("No post available with that ID", 404)
+  }
   res.status(200).json({
     status: "success",
     data: {
@@ -56,7 +63,10 @@ exports.updateBlogPost = catchAsync(async (req, res) => {
 });
 
 exports.deleteBlogPost = catchAsync(async (req, res) => {
-  await BlogPosts.findByIdAndDelete(req.params.id);
+  const post = await BlogPosts.findByIdAndDelete(req.params.id);
+  if(!post){
+    throw new AppError("No post available with that ID", 404)
+  }
   res.status(204).json({
     status: "success",
     data: null,

@@ -1,25 +1,15 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const mongoose = require("mongoose");
 
 const AppError = require("./utils/appError");
 const blogRoute = require("./routes/blogRoute");
 const globalErrorHandler = require("./controllers/errorController");
 
-mongoose.set("strictQuery", true);
-mongoose
-  .connect("mongodb://localhost:27017/BouncyElegance")
-  .then((res) => {
-    console.log("MONGO CONNECTION SUCCESSFUL");
-  })
-  .catch((err) => {
-    console.log("MONGO CONNECTION UNSUCCESSFUL", err);
-  });
-
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use(express.json())
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 

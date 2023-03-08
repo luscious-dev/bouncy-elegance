@@ -1,23 +1,41 @@
 const app = require("./app");
 const dotenv = require("dotenv");
+const mongoose = require("mongoose");
+
 
 dotenv.config({ path: `${__dirname}/config.env` });
 
-// /api/v1/users
+process.on("uncaughtException", err=>{
+  console.log(err.name)
+  console.log(err.message)
+  console.log("UNHANDLED EXCEPTION! Shutting down...")
+  process.exit(1)
+})
 
-// /api/v1/users/:id
+mongoose.set("strictQuery", true);
+mongoose
+  .connect("mongodb://localhost:27017/BouncyElegance")
+  .then((res) => {
+    console.log("MONGO CONNECTION SUCCESSFUL");
+  })
+  .catch((err) => {
+    console.log("MONGO CONNECTION UNSUCCESSFUL", err);
+  });
 
-// /api/v1/blog/posts
 
-// /api/v1/blog/posts/new
-
-// /api/v1/blog/posts/:id
-
-// /api/v1/blog/posts/:id/comments
-
-// /api/v1/blog/posts/:postid/comments/:commentid
 
 const port = process.env.APP_PORT || 8000;
-app.listen(process.env.APP_PORT, () => {
+
+const server = app.listen(process.env.APP_PORT, () => {
   console.log(`LISTENING ON PORT ${port}...`);
 });
+
+// Handle any unhandled promise rejection
+process.on("unhandledRejection", err=>{
+  console.log(err.message)
+  console.log("UNHANDLED REJECTION. Shutting down...")
+  server.close(()=>{
+    process.exit(1)
+  })
+})
+

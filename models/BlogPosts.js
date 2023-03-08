@@ -8,6 +8,7 @@ const BlogPostSchema = Schema({
   title: {
     type: String,
     required: [true, "A blog post must have a title"],
+    unique: true
   },
   author: {
     type: String,
@@ -22,15 +23,15 @@ const BlogPostSchema = Schema({
   },
   body: {
     type: String,
-    required: true,
+    required: [true, "A blog post must have a body"],
   },
   photo: {
     type: String,
-    required: true,
+    required: [true, "A blog post must have a photo"],
   },
   category: {
     type: String,
-    required: true,
+    required: [true, "A blog post must belong to a category"],
   },
   length: {
     type: Number,
@@ -50,11 +51,9 @@ const BlogPostSchema = Schema({
   visits: {
     type: Number,
     default: 0,
-    required: true,
   },
   slug: {
     type: String,
-    required: true,
     unique: true,
   },
 });
