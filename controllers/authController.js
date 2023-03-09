@@ -6,7 +6,9 @@ const User = require("../models/User");
 const AppError = require("../utils/appError");
 
 const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET);
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
 };
 
 exports.signup = catchAsync(async (req, res) => {
@@ -74,7 +76,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   // 4. Chech if password has not been changed since the last log in
-  console.log(currentUser.changedPasswordAfter(decoded.iat));
   if (currentUser.changedPasswordAfter(decoded.iat)) {
     return next(
       new AppError(
@@ -84,7 +85,19 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  console.log(decoded);
+  req.user = currentUser;
 
   next();
 });
+
+exports.restrict = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError("You don't have permission to perform this action!", 403)
+      );
+    }
+
+    next();
+  };
+};

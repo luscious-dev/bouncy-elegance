@@ -66,8 +66,6 @@ UserSchema.methods.changedPasswordAfter = function (tokenIssuedTime) {
   const changedPasswordAtSecs = parseInt(
     this.changedPasswordAt.getTime() / 1000
   );
-  // console.log(changedPasswordAtSecs, tokenIssuedTime);
-  // console.log(changedPasswordAtSecs > tokenIssuedTime);
 
   if (changedPasswordAtSecs > tokenIssuedTime) {
     return true;
