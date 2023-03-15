@@ -168,3 +168,31 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     token: signToken(user._id),
   });
 });
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user._id).select("+password");
+
+  if (!user) {
+    return next(
+      new AppError(
+        "The user for which this token was genereated no longer exists",
+        404
+      )
+    );
+  }
+
+  const { currentPassword, password, passwordConfirm } = req.body;
+  if (!(await user.correctPassword(user.password, currentPassword))) {
+    return next(new AppError("Incorrect password", 401));
+  }
+
+  user.password = password;
+  user.passwordConfirm = passwordConfirm;
+
+  await user.save();
+
+  res.status(200).json({
+    status: "success",
+    token: signToken(user._id),
+  });
+});
