@@ -58,6 +58,10 @@ const UserSchema = new Schema({
   changedPasswordAt: {
     type: Date,
   },
+  active: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 UserSchema.methods.correctPassword = async (currentPassword, sentPassword) => {

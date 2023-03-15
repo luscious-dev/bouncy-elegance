@@ -13,6 +13,31 @@ const signToken = (id) => {
   });
 };
 
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+
+  const cookieOptions = {
+    httpOnly: true,
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+  };
+  if (process.env.NODE_ENV == "production") {
+    cookieOptions.secure = true;
+  }
+
+  res.cookie("jwt", token, cookieOptions);
+  user.password = undefined;
+
+  res.status(statusCode).json({
+    status: "success",
+    token: token,
+    data: {
+      user,
+    },
+  });
+};
+
 exports.signup = catchAsync(async (req, res) => {
   const newUser = await User.create({
     firstName: req.body.firstName,
@@ -21,11 +46,13 @@ exports.signup = catchAsync(async (req, res) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
-  res.status(200).json({
-    status: "success",
-    token: signToken(newUser._id),
-    newUser,
-  });
+  // res.status(200).json({
+  //   status: "success",
+  //   token: signToken(newUser._id),
+  //   newUser,
+  // });
+
+  createSendToken(newUser, 200, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -41,10 +68,11 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Incorrect email or password", 401));
   }
 
-  res.status(200).json({
-    status: "success",
-    token: signToken(currentUser._id),
-  });
+  // res.status(200).json({
+  //   status: "success",
+  //   token: signToken(currentUser._id),
+  // });
+  createSendToken(currentUser, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -163,10 +191,11 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.paswordResetTokenExpires = undefined;
   await user.save();
 
-  res.status(200).json({
-    status: "success",
-    token: signToken(user._id),
-  });
+  // res.status(200).json({
+  //   status: "success",
+  //   token: signToken(user._id),
+  // });
+  createSendToken(user, 200, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -191,8 +220,9 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  res.status(200).json({
-    status: "success",
-    token: signToken(user._id),
-  });
+  // res.status(200).json({
+  //   status: "success",
+  //   token: signToken(user._id),
+  // });
+  createSendToken(user, 200, res);
 });
