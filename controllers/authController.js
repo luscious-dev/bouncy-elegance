@@ -46,12 +46,6 @@ exports.signup = catchAsync(async (req, res) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
-  // res.status(200).json({
-  //   status: "success",
-  //   token: signToken(newUser._id),
-  //   newUser,
-  // });
-
   createSendToken(newUser, 200, res);
 });
 
@@ -68,10 +62,6 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Incorrect email or password", 401));
   }
 
-  // res.status(200).json({
-  //   status: "success",
-  //   token: signToken(currentUser._id),
-  // });
   createSendToken(currentUser, 200, res);
 });
 
@@ -190,11 +180,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetToken = undefined;
   user.paswordResetTokenExpires = undefined;
   await user.save();
-
-  // res.status(200).json({
-  //   status: "success",
-  //   token: signToken(user._id),
-  // });
   createSendToken(user, 200, res);
 });
 
@@ -220,9 +205,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  // res.status(200).json({
-  //   status: "success",
-  //   token: signToken(user._id),
-  // });
   createSendToken(user, 200, res);
 });
