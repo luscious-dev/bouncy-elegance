@@ -5,6 +5,7 @@ const BlogPostVisits = require("../models/BlogPostVisits");
 
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
+const User = require("../models/User");
 
 exports.getAllPosts = catchAsync(async (req, res) => {
   const features = new APIFeatures(BlogPosts.find(), req.query);
@@ -24,8 +25,8 @@ exports.getAllPosts = catchAsync(async (req, res) => {
 
 exports.getPost = catchAsync(async (req, res) => {
   const post = await BlogPosts.findById(req.params.id);
-  if(!post){
-    throw new AppError("No post available with that ID", 404)
+  if (!post) {
+    throw new AppError("No post available with that ID", 404);
   }
   res.status(200).json({
     status: "success",
@@ -51,8 +52,8 @@ exports.updateBlogPost = catchAsync(async (req, res) => {
     runValidators: true,
     new: true,
   });
-  if(!blogPost){
-    throw new AppError("No post available with that ID", 404)
+  if (!blogPost) {
+    throw new AppError("No post available with that ID", 404);
   }
   res.status(200).json({
     status: "success",
@@ -64,13 +65,32 @@ exports.updateBlogPost = catchAsync(async (req, res) => {
 
 exports.deleteBlogPost = catchAsync(async (req, res) => {
   const post = await BlogPosts.findByIdAndDelete(req.params.id);
-  if(!post){
-    throw new AppError("No post available with that ID", 404)
+  if (!post) {
+    throw new AppError("No post available with that ID", 404);
   }
   res.status(204).json({
     status: "success",
     data: null,
   });
+});
+
+exports.ownsBlogPost = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    return next(
+      new AppError(
+        "The User for which this token was genereated does not exist!",
+        401
+      )
+    );
+  }
+  if (["admin", "blog-owner"].includes(user.role)) {
+    return next();
+  }
+  if (!user.isPostOwner(req.params.id)) {
+    return next(new AppError("You are not authorized to edit the post!", 403));
+  }
+  next();
 });
 
 // Business Intelligence Routes

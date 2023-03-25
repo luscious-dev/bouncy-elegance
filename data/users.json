@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "61536d1cb8c99bde0a034b64",
+    "email": "john@example.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "61536d1cb8c99bde0a034b65",
+    "email": "jane@example.com",
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "role": "writer",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "61536d1cb8c99bde0a034b66",
+    "email": "admin@example.com",
+    "firstName": "Admin",
+    "lastName": "User",
+    "role": "admin",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "61536d1cb8c99bde0a034b67",
+    "email": "james@example.com",
+    "firstName": "James",
+    "lastName": "Smith",
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "61536d1cb8c99bde0a034b68",
+    "email": "sara@example.com",
+    "firstName": "Sara",
+    "lastName": "Johnson",
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "61536d1cb8c99bde0a034b69",
+    "email": "chris@example.com",
+    "firstName": "Chris",
+    "lastName": "Davis",
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "61536d1cb8c99bde0a034b6a",
+    "email": "mary@example.com",
+    "firstName": "Mary",
+    "lastName": "Wilson",
+    "role": "writer",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "61536d1cb8c99bde0a034b6b",
+    "email": "peter@example.com",
+    "firstName": "Peter",
+    "lastName": "Thompson",
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "61536d1cb8c99bde0a034b6c",
+    "email": "david@example.com",
+    "firstName": "David",
+    "lastName": "Garcia",
+    "role": "user",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  },
+  {
+    "_id": "61536d1cb8c99bde0a034b6d",
+    "email": "jennifer@example.com",
+    "firstName": "Jennifer",
+    "lastName": "Martinez",
+    "role": "admin",
+    "password": "password123",
+    "passwordConfirm": "password123"
+  }
+]

@@ -31,22 +31,10 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getMe = catchAsync((req, res, next) => {
-  const user = req.user;
-
-  if (!user) {
-    return next(
-      new AppError(
-        "The token for which the user was generated does not exist",
-        401
-      )
-    );
-  }
-
-  req.params.id = user._id;
-
+exports.getMe = (req, res, next) => {
+  req.params.id = req.user._id;
   next();
-});
+};
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm)
@@ -113,10 +101,11 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
 });
 
 exports.updateUser = catchAsync(async (req, res, next) => {
-  const user = await User.findByIdAndUpdate(req.params.id, {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
+
   // Update user
   if (!user) {
     return next(new AppError("User with the ID not found", 404));

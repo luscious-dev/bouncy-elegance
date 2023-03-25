@@ -2,25 +2,46 @@ const express = require("express");
 const router = new express.Router();
 const blogControllers = require("../controllers/blogController");
 const authController = require("../controllers/authController");
+const commentsRoute = require("../routes/commentRoute");
 
-router.get(
-  "/posts",
+router.use("/:blogid/comments", commentsRoute);
 
-  blogControllers.getAllPosts
-);
+router
+  .route("/")
+  .get(blogControllers.getAllPosts)
+  .post(
+    authController.protect,
+    authController.restrict("admin", "blog-owner", "writer"),
+    blogControllers.createBlogPost
+  );
+
+router
+  .route("/:id")
+  .get(blogControllers.getPost)
+  .patch(
+    authController.protect,
+    authController.restrict("admin", "blog-owner", "writer"),
+    blogControllers.ownsBlogPost,
+    blogControllers.updateBlogPost
+  )
+  .delete(
+    authController.protect,
+    authController.restrict("admin", "blog-owner", "writer"),
+    blogControllers.ownsBlogPost,
+    blogControllers.deleteBlogPost
+  );
 
 // Know which posts have the highest number of views
 router.get(
-  "/posts/getTopViews/:number",
+  "/getTopViews/:number",
   authController.protect,
   authController.restrict("admin"),
-
   blogControllers.getBlogPostsByViews
 );
 
 // Know which posts have the most likes
 router.get(
-  "/posts/getTopLikesPosts/:number",
+  "/getTopLikesPosts/:number",
   authController.protect,
   authController.restrict("admin"),
   blogControllers.getBlogPostByLikes
@@ -28,7 +49,7 @@ router.get(
 
 // Which post categories have the most likes
 router.get(
-  "/posts/getTopLikesCategory/:number",
+  "/getTopLikesCategory/:number",
   authController.protect,
   authController.restrict("admin"),
   blogControllers.getPostCategoriesByLikes
@@ -36,40 +57,17 @@ router.get(
 
 // Which categories have the most views
 router.get(
-  "/posts/getTopViewsCategory/:number",
+  "/getTopViewsCategory/:number",
   authController.protect,
   authController.restrict("admin"),
   blogControllers.getPostCategoriesByViews
 );
 
 router.get(
-  "/posts/getGeneralStats",
+  "/getGeneralStats",
   authController.protect,
   authController.restrict("admin"),
   blogControllers.getGeneralStats
-);
-
-router.get("/posts/:id", blogControllers.getPost);
-
-router.post(
-  "/posts",
-  authController.protect,
-  authController.restrict("admin"),
-  blogControllers.createBlogPost
-);
-
-router.patch(
-  "/posts/:id",
-  authController.protect,
-  authController.restrict("admin"),
-  blogControllers.updateBlogPost
-);
-
-router.delete(
-  "/posts/:id",
-  authController.protect,
-  authController.restrict("admin"),
-  blogControllers.deleteBlogPost
 );
 
 module.exports = router;

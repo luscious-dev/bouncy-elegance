@@ -8,10 +8,11 @@ const BlogPostSchema = Schema({
   title: {
     type: String,
     required: [true, "A blog post must have a title"],
-    unique: true
+    unique: true,
   },
   author: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: "User",
     required: {
       values: true,
       message: "A blog post must have an author",

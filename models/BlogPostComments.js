@@ -15,6 +15,23 @@ const BlogPostCommentSchema = new Schema({
     ref: "BlogPost",
   },
 
+  reply: [
+    {
+      comment: {
+        type: String,
+        required: true,
+      },
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+      dateCreated: {
+        type: Date,
+        default: Date.now(),
+      },
+    },
+  ],
+
   dateCreated: {
     type: Date,
     default: Date.now(),

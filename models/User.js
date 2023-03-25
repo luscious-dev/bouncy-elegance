@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const BlogPost = require("./BlogPosts");
 
 const UserSchema = new Schema({
   email: {
@@ -30,7 +31,7 @@ const UserSchema = new Schema({
   role: {
     type: String,
     enum: {
-      values: ["user", "admin", "guest"],
+      values: ["user", "admin", "blog-owner", "writer"],
       message: "This is not a valid role",
     },
     default: "user",
@@ -66,6 +67,15 @@ const UserSchema = new Schema({
 
 UserSchema.methods.correctPassword = async (currentPassword, sentPassword) => {
   return await bcrypt.compare(sentPassword, currentPassword);
+};
+
+UserSchema.methods.isPostOwner = async function (postid) {
+  const blogPost = await BlogPost.findById(postid);
+  if (blogPost) {
+    return blogPost.author == this._id;
+  }
+  console.log("Called isPostOwner");
+  return false;
 };
 
 UserSchema.methods.changedPasswordAfter = function (tokenIssuedTime) {

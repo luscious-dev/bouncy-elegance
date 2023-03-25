@@ -9,34 +9,22 @@ router.post("/signup", authController.signup);
 router.post("/forgotPassword", authController.forgotPassword);
 router.patch("/resetPassword/:token", authController.resetPassword);
 
-router.patch(
-  "/updateMyPassword",
-  authController.protect,
-  authController.updatePassword
-);
+// Protect all the routes
+router.use(authController.protect);
 
-router.patch("/updateMe", authController.protect, userController.updateMe);
-router.delete("/deleteMe", authController.protect, userController.deleteMe);
-router.get(
-  "/me",
-  authController.protect,
-  userController.getMe,
-  userController.getUser
-);
+router.patch("/updateMyPassword", authController.updatePassword);
 
+router.patch("/updateMe", userController.updateMe);
+router.delete("/deleteMe", userController.deleteMe);
+router.get("/me", userController.getMe, userController.getUser);
+
+// Restriced to admin only
+router.use(authController.restrict("admin"));
 router
   .route("/:id")
-  .get(
-    authController.protect,
-    authController.restrict("admin"),
-    userController.getUser
-  )
+  .get(userController.getUser)
   .patch(userController.updateUser)
-  .delete(
-    authController.protect,
-    authController.restrict("admin"),
-    userController.deleteUser
-  );
+  .delete(userController.deleteUser);
 
 router
   .route("/")

@@ -12,6 +12,7 @@ const app = express();
 const AppError = require("./utils/appError");
 const blogRoute = require("./routes/blogRoute");
 const userRoute = require("./routes/userRoute");
+const commentRoute = require("./routes/commentRoute");
 const globalErrorHandler = require("./controllers/errorController");
 
 app.set("view engine", "ejs");
@@ -35,8 +36,9 @@ app.use(hpp());
 
 app.use("/api", limiter);
 
-app.use("/api/v1/blog/", blogRoute);
+app.use("/api/v1/blog/posts", blogRoute);
 app.use("/api/v1/users", userRoute);
+app.use("/api/v1/comments", commentRoute);
 
 app.get("/blog", (req, res) => {
   res.render("blog-home");
