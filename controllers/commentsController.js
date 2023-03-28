@@ -12,8 +12,8 @@ const filterBody = function (body, ...fields) {
 
 exports.getAllComments = catchAsync(async (req, res, next) => {
   const query = BlogPostComment.find();
-  if (req.params.blogid) {
-    query.find({ blogPost: req.params.blogid });
+  if (req.params.postid) {
+    query.find({ blogPost: req.params.postid });
   }
 
   const comments = await query;
@@ -42,7 +42,7 @@ exports.getComment = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteComment = catchAsync(async (req, res, next) => {
-  const comment = await BlogPostComment.findById(req.params.id);
+  const comment = await BlogPostComment.findByIdAndDelete(req.params.id);
   if (!comment) {
     return next(new AppError("No Comment Found With That ID!", 404));
   }
@@ -54,9 +54,14 @@ exports.deleteComment = catchAsync(async (req, res, next) => {
 });
 
 exports.createComment = catchAsync(async (req, res, next) => {
-  const comment = await BlogPostComment.create(
-    filterBody(req.body, "comment", "user", "blogPost")
-  );
+  if (!req.params.postid) {
+    req.params.postid = req.body.blogPost;
+  }
+  const comment = await BlogPostComment.create({
+    comment: req.body.comment,
+    user: req.user._id,
+    blogPost: req.params.postid,
+  });
 
   res.status(200).json({
     status: "success",
@@ -67,10 +72,11 @@ exports.createComment = catchAsync(async (req, res, next) => {
 });
 
 exports.addReply = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   const comment = await BlogPostComment.findByIdAndUpdate(
     req.params.id,
-    { reply: { $push: req.body } },
-    { new: true, runValidators: true }
+    { $push: { reply: { comment: req.body.comment, user: req.user._id } } },
+    { new: true }
   );
 
   if (!comment) {

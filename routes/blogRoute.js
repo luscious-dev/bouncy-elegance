@@ -4,7 +4,7 @@ const blogControllers = require("../controllers/blogController");
 const authController = require("../controllers/authController");
 const commentsRoute = require("../routes/commentRoute");
 
-router.use("/:blogid/comments", commentsRoute);
+router.use("/:postid/comments", commentsRoute);
 
 router
   .route("/")
