@@ -12,7 +12,7 @@ const BlogPostCommentSchema = new Schema({
   },
   blogPost: {
     type: Schema.Types.ObjectId,
-    ref: "BlogPost",
+    ref: "BlogPosts",
   },
 
   reply: [
@@ -36,6 +36,25 @@ const BlogPostCommentSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
+});
+
+BlogPostCommentSchema.pre("find", function (next) {
+  this.populate({
+    path: "user",
+    select: "firstName lastName email",
+  });
+  next();
+});
+
+BlogPostCommentSchema.pre("findOne", function (next) {
+  this.populate({
+    path: "user",
+    select: "firstName lastName",
+  }).populate({
+    path: "blogPost",
+    select: "title category author",
+  });
+  next();
 });
 
 module.exports = mongoose.model("BlogPostComment", BlogPostCommentSchema);

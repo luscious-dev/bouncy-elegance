@@ -24,10 +24,14 @@ exports.getAllPosts = catchAsync(async (req, res) => {
 });
 
 exports.getPost = catchAsync(async (req, res) => {
-  const post = await BlogPosts.findById(req.params.id);
+  const post = await BlogPosts.findById(req.params.id).populate("comments");
   if (!post) {
     throw new AppError("No post available with that ID", 404);
   }
+
+  await BlogPostVisits.create({
+    blogPost: req.params.id,
+  });
   res.status(200).json({
     status: "success",
     data: {
@@ -266,3 +270,8 @@ module.exports.getGeneralStats = catchAsync(async (req, res) => {
     },
   });
 });
+
+exports.cleanUpBlog = async function (blogPostId) {
+  await BlogPostVisits.deleteMany({ blogPost: blogPostId });
+  await BlogPostLikes.deleteMany({ blogPost: blogPostId });
+};

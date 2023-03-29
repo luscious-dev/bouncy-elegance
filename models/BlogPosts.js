@@ -1,62 +1,73 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const slugify = require("slugify");
-const BlogPostLikes = require("./BlogPostLikes");
-const BlogPostVisits = require("./BlogPostVisits");
+const blogController = require("../controllers/blogController");
 
-const BlogPostSchema = Schema({
-  title: {
-    type: String,
-    required: [true, "A blog post must have a title"],
-    unique: true,
-  },
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: {
-      values: true,
-      message: "A blog post must have an author",
+const BlogPostSchema = Schema(
+  {
+    title: {
+      type: String,
+      required: [true, "A blog post must have a title"],
+      unique: true,
+    },
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: {
+        values: true,
+        message: "A blog post must have an author",
+      },
+    },
+    description: {
+      type: String,
+      required: [true, "A blog post must have a description"],
+    },
+    body: {
+      type: String,
+      required: [true, "A blog post must have a body"],
+    },
+    photo: {
+      type: String,
+      required: [true, "A blog post must have a photo"],
+    },
+    category: {
+      type: String,
+      required: [true, "A blog post must belong to a category"],
+    },
+    length: {
+      type: Number,
+    },
+    published: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    createdDate: {
+      type: Date,
+      default: Date.now(),
+    },
+    tags: {
+      type: Array,
+    },
+    visits: {
+      type: Number,
+      default: 0,
+    },
+    slug: {
+      type: String,
+      unique: true,
     },
   },
-  description: {
-    type: String,
-    required: [true, "A blog post must have a description"],
-  },
-  body: {
-    type: String,
-    required: [true, "A blog post must have a body"],
-  },
-  photo: {
-    type: String,
-    required: [true, "A blog post must have a photo"],
-  },
-  category: {
-    type: String,
-    required: [true, "A blog post must belong to a category"],
-  },
-  length: {
-    type: Number,
-  },
-  published: {
-    type: Boolean,
-    default: false,
-    required: true,
-  },
-  createdDate: {
-    type: Date,
-    default: Date.now(),
-  },
-  tags: {
-    type: Array,
-  },
-  visits: {
-    type: Number,
-    default: 0,
-  },
-  slug: {
-    type: String,
-    unique: true,
-  },
+  { toJSON: { virtuals: true }, toObject: { virtuals: true } }
+);
+
+BlogPostSchema.index({ tags: 1 });
+// You can use "virtual populate" to know about all the comments it's got
+// This is a way of keeping an array of comments without storing it in the database
+BlogPostSchema.virtual("comments", {
+  ref: "BlogPostComment",
+  foreignField: "blogPost",
+  localField: "_id",
 });
 
 BlogPostSchema.pre("validate", function (next) {
@@ -76,14 +87,13 @@ BlogPostSchema.pre("save", function (next) {
   next();
 });
 
-BlogPostSchema.pre("remove", function (next) {
-  console.log(this);
+BlogPostSchema.pre("find", function (next) {
+  this.populate("author");
   next();
 });
 
 BlogPostSchema.post(/delete/i, async function (result, next) {
-  await BlogPostVisits.deleteMany({ blogPost: result._id });
-  await BlogPostLikes.deleteMany({ blogPost: result._id });
+  blogController.cleanUpBlog(result._id);
   next();
 });
 
