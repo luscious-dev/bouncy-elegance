@@ -56,8 +56,10 @@
   padding: 8rem 0;
   position: relative;
   .products {
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
 
     &__badge {

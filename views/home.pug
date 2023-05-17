@@ -1,0 +1,107 @@
+extends base
+
+mixin productItem(type, name, image="/img/DSC08630.jpg", sizes="A, B, C, D, E")
+    .products__item
+        .products__image
+            img(src=`${image}` alt="Prosthesis")
+        .products__description
+            ul
+                li
+                    span.field Type: 
+                    | #{type}
+                li
+                    span.field Name: 
+                    | #{name}
+                li
+                    span.field Sizes: 
+                    | #{sizes}
+
+mixin reviewItem(name, message)
+    .review
+        h3.review__name #{name}
+        span.faded Says
+        p.review__message
+            | &ldquo;#{message}&rdquo;
+
+block content
+    .hero
+        include _nav
+
+        .hero__content.container
+            .hero__text-box
+                h1.hero__primary This should be some catch phrase
+                p.hero__description
+                    | Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid soluta repellat dignissimos et error voluptate
+                a.btn.btn--primary.btn--large.btn--animated(href="#")
+                    | View Products
+            .hero__img-box
+                img.hero__img(src="/img/blog-post/13.jpg" alt="Prosthesis")
+                //- img.hero__img(src="/img/hero-img.png" alt="Prosthesis")
+
+    section.products-section
+        .container
+            h2.heading.heading--primary.u-center Variety of Sizes Available
+
+            p.heading-description--primary.paragraph-centered.u-mb-big
+                | The most comfortable and affordable sets of prosthesis you can find available for a variety of breast type.
+            .products__badge
+                .badge__content
+                    h2 Metrics (Weight)
+                    ul
+                        li Cup A - 500g
+                        li Cup B - 600g
+                        li Cup C - 800g
+                        li Cup D - 1000g
+                        li Cup E - 1200g
+
+            .products
+                +productItem("Water droplet type","Flat bottom silicone breast")
+                +productItem("Water droplet type", "Flat bottom silicone breast")
+                +productItem("Water droplet type", "Flat bottom silicone breast")
+                +productItem("Water droplet type", "Flat bottom silicone breast")
+
+    section.quote-section
+        .container
+            .quotation
+                .quotation__text
+                    blockquote
+                        p
+                            | &ldquo;I created this platform as a means to provide breast cancer survivors based in Nigeria a way to obtain prosthesis at affordable prices.&rdquo;
+                        footer.quotation__footer
+                            .quotation__attribution Akin-Odanyer Elizabeth
+                            .quotation__attribution--title Founder
+
+                    a.btn.btn--large-outlined.btn--outlined.u-uppercase(href="#") About Me
+
+                .quotation__image
+                    figure
+                        img(src="/img/DSC08702.png" alt="founder img")
+
+    section.reviews-section
+        .container
+            h2.heading.heading--primary.u-center.u-mb-big
+                | We Satisfy our customers
+            .reviews-grid
+                +reviewItem("Chiamaka Ngozi","By far the best prosthesis I've ever bought. Not too heavy and very durable")
+                +reviewItem("Chiamaka Ngozi","By far the best prosthesis I've ever bought. Not too heavy and very durable")
+                +reviewItem("Chiamaka Ngozi","By far the best prosthesis I've ever bought. Not too heavy and very durable")
+                
+    section.blog-section
+        .container
+            h1.heading.heading--primary.u-mb-small
+                | Check out my lates blog post
+            p.text--big.u-mb-medium
+                | There are lots of content for you. From educational contents to life advices.
+
+            .u-d-flex.u-d-flex-justify-sb.u-d-flex-align-ct
+                .preview-image
+                    img(src="/img/DSC08578.jpg", alt="")
+                .preview-blog-posts
+                    .blog-post
+                        .blog-post__title.u-mb-small
+                            | How to feel good about yourself?
+                        a.blog-post__link(href="#") Read more &rArr;
+                    .blog-post
+                        .blog-post__title.u-mb-small
+                            | How can you get a career in clinical psychology?
+                        a.blog-post__link(href="#") Read more &rArr;

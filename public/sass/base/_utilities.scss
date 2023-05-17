@@ -5,6 +5,12 @@
   margin: 0 auto;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px 30px;
+}
+
 .u-center {
   text-align: center !important;
 }

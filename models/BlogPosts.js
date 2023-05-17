@@ -48,6 +48,12 @@ const BlogPostSchema = Schema(
     },
     tags: {
       type: Array,
+      validate: {
+        validator: function (arr) {
+          return arr.length <= 2; // Maximum 5 elements allowed
+        },
+        message: "Array length exceeds the maximum allowed length of 2",
+      },
     },
     visits: {
       type: Number,
@@ -88,7 +94,10 @@ BlogPostSchema.pre("save", function (next) {
 });
 
 BlogPostSchema.pre("find", function (next) {
-  this.populate("author");
+  this.populate({
+    path: "author",
+    select: "firstName lastName role profilePhoto",
+  });
   next();
 });
 

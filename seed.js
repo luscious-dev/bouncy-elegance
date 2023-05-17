@@ -47,19 +47,22 @@ const tags = [
 for (let i = 0; i < 11; i++) {
   let post = new BlogPost({
     title: `Lorem Ipsum dolor sit amet ${(i + Math.random()).toFixed(3)}`,
-    author: authors[Math.floor(Math.random() * authors.length)],
+    author: "64649c5e246f02686c62f18f",
     body: `I love supporting the **[EFF](https://eff.org)**.
         This is the *[Markdown Guide](https://www.markdownguide.org)*.
         See the section on [\`code\`](#code).`,
     photo: img[Math.floor(Math.random() * img.length)],
     category: categories[Math.floor(Math.random() * categories.length)],
-    tags: () => {
+    tags: (function () {
       let arr = [];
       while (arr.length <= 3) {
-        arr.push(tags[Math.floor(Math.random() * tags.length)]);
+        let tag = tags[Math.floor(Math.random() * tags.length)];
+        if (!arr.includes(tag)) {
+          arr.push(tag);
+        }
       }
       return arr;
-    },
+    })(),
     description: "Lorem ipsum dolor sit amet, consect",
   });
 
@@ -73,4 +76,4 @@ for (let i = 0; i < 11; i++) {
     });
 }
 
-process.exit(0);
+// process.exit(0);

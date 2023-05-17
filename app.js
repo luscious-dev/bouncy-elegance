@@ -13,9 +13,11 @@ const AppError = require("./utils/appError");
 const blogRoute = require("./routes/blogRoute");
 const userRoute = require("./routes/userRoute");
 const commentRoute = require("./routes/commentRoute");
+const viewRoute = require("./routes/viewRoute");
 const globalErrorHandler = require("./controllers/errorController");
 
-app.set("view engine", "ejs");
+app.set("view engine", "pug");
+// app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(helmet());
@@ -40,13 +42,7 @@ app.use("/api/v1/blog/posts", blogRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/comments", commentRoute);
 
-app.get("/blog", (req, res) => {
-  res.render("blog-home");
-});
-
-app.get("/", (req, res) => {
-  res.render("home");
-});
+app.use("/", viewRoute);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Could not find "${req.originalUrl}" on the server!`, 404));

@@ -1,0 +1,15 @@
+mixin navbarItem(text, href="#", active=false)
+    li.navbar__item
+        a(href=`${href}`, class=`navbar__link navbar__link--colored navbar__link--animated ${active ? 'navbar__link--active':''}`)= text
+
+div.navbar.container
+    div.navbar__logo-box
+        a(href="/" class=`navbar__link navbar__link--logo ${colored ? 'navbar__link--colored':''}`) Lizzie
+
+    ul.navbar__nav
+        +navbarItem("Home", "/", true)
+        +navbarItem("About")
+        +navbarItem("Blog", "/blog", true)
+    
+    .navbar__accounts
+        a.navbar__link.navbar__link--colored.navbar__link--underlined(href="#") Accounts

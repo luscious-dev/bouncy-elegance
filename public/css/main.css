@@ -23,6 +23,12 @@ body {
   margin: 0 auto;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px 30px;
+}
+
 .u-center {
   text-align: center !important;
 }
@@ -127,6 +133,12 @@ a {
 .heading--secondary {
   font-size: 3.6rem;
   margin-bottom: 2rem;
+}
+
+.heading--card {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--color-dark);
 }
 
 .heading-description--primary {
@@ -412,8 +424,8 @@ a {
   position: relative;
 }
 .products-section .products {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 30px;
 }
 .products-section .products__badge {
@@ -599,4 +611,77 @@ a {
 }
 .banner__text-content {
   margin-top: -4rem;
+}
+
+.blog-posts {
+  min-height: 20rem;
+  padding: 8rem 0;
+  font-family: "Poppins", sans-serif;
+}
+.blog-posts__card {
+  box-shadow: 0 1.5rem 2.5rem rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+.blog-posts__card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.4);
+}
+.blog-posts .card__image {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  background-color: pink;
+}
+.blog-posts .card__image img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  height: 100%;
+}
+.blog-posts .card__content {
+  padding: 20px;
+}
+.blog-posts .card__meta {
+  font-size: 1.4rem;
+}
+.blog-posts .card__meta .category {
+  color: #403d38;
+  font-weight: bold;
+}
+.blog-posts .card__meta .date {
+  color: #777;
+}
+.blog-posts .card__text p {
+  font-size: 1.5rem;
+  color: #777;
+}
+.blog-posts .card__author {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.blog-posts .card__author .author__image {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.blog-posts .card__author .author__image img {
+  max-width: 100%;
+}
+.blog-posts .card__author .author__name {
+  display: flex;
+  flex-direction: column;
+}
+.blog-posts .card__author .author__name strong {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #403d38;
+}
+.blog-posts .card__author .author__name span {
+  font-size: 1.3rem;
+  color: #777;
 }

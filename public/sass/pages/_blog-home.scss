@@ -19,3 +19,89 @@
     margin-top: -4rem;
   }
 }
+
+.blog-posts {
+  min-height: 20rem;
+  padding: 8rem 0;
+  font-family: "Poppins", sans-serif;
+
+  &__card {
+    box-shadow: 0 1.5rem 2.5rem rgba(black, 0.2);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 1rem 1.5rem rgba(black, 0.4);
+    }
+  }
+  .card__image {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background-color: pink;
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      height: 100%;
+    }
+  }
+
+  .card__content {
+    padding: 20px;
+  }
+
+  .card__meta {
+    font-size: 1.4rem;
+    .category {
+      color: $color-dark;
+      font-weight: bold;
+    }
+    .date {
+      color: $color-grey-dark-1;
+    }
+  }
+
+  .card__text {
+    p {
+      font-size: 1.5rem;
+      color: $color-grey-dark-1;
+    }
+  }
+
+  .card__author {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    .author__image {
+      // display: flex;
+      // flex: 0 0 45px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      overflow: hidden;
+
+      img {
+        max-width: 100%;
+      }
+    }
+
+    .author__name {
+      display: flex;
+      flex-direction: column;
+
+      strong {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: $color-dark;
+      }
+      span {
+        font-size: 1.3rem;
+        color: $color-grey-dark-1;
+      }
+    }
+  }
+}

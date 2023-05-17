@@ -53,6 +53,10 @@ const UserSchema = new Schema({
     },
   },
 
+  profilePhoto: {
+    type: String,
+  },
+
   passwordResetToken: String,
   paswordResetTokenExpires: Date,
 
