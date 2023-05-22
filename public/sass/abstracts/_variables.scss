@@ -1,5 +1,10 @@
 $color-primary: #ff218c;
 $color-primary-light: #f4c2c2;
+// $color-primary-light: #fa8029;
+// $color-primary-light: #ff66cc;
+$color-secondary: #ff66cc;
+
+$gradient: linear-gradient(to right bottom, $color-secondary, $color-primary);
 // $color-secondary: ;
 $color-dark: #403d38;
 $color-grey-light-1: #f7f7f7;

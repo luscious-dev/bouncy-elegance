@@ -69,7 +69,7 @@ const UserSchema = new Schema({
   },
 });
 
-UserSchema.methods.correctPassword = async (currentPassword, sentPassword) => {
+UserSchema.methods.correctPassword = async (sentPassword, currentPassword) => {
   return await bcrypt.compare(sentPassword, currentPassword);
 };
 

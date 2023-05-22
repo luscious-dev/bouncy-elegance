@@ -1,25 +1,51 @@
 const AppError = require("../utils/appError");
 
-const handleDevError = (err, res) => {
-  console.log(err);
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message,
-    error: err,
-  });
-};
-
-const handleProdError = (err, res) => {
-  if (err.isOperational) {
+const handleDevError = (err, req, res) => {
+  // API
+  if (req.originalUrl.startsWith("/api")) {
     res.status(err.statusCode).json({
       status: err.status,
       message: err.message,
+      error: err,
     });
   } else {
-    res.status(err.statusCode).json({
-      status: err.status,
-      message: "Something went very wrong!",
+    // RENDERED
+    res.status(err.statusCode).render("error", {
+      title: "Something went wrong",
+      msg: err.message,
+      colored: true,
     });
+  }
+};
+
+const handleProdError = (err, req, res) => {
+  if (req.originalUrl.startsWith("/api")) {
+    if (err.isOperational) {
+      res.status(err.statusCode).json({
+        status: err.status,
+        message: err.message,
+      });
+    } else {
+      res.status(err.statusCode).json({
+        status: err.status,
+        message: "Something went very wrong!",
+      });
+    }
+  } else {
+    // RENDERED
+    if (err.isOperational) {
+      res.status(err.statusCode).render("error", {
+        title: "Something went wrong",
+        msg: err.message,
+        colored: true,
+      });
+    } else {
+      res.status(err.statusCode).render("error", {
+        title: "Something went wrong",
+        msg: "Please try again later",
+        colored: true,
+      });
+    }
   }
 };
 
@@ -47,12 +73,12 @@ module.exports = (err, req, res, next) => {
   err.status = err.status || "error";
 
   if (process.env.NODE_ENV == "development") {
-    handleDevError(err, res);
+    handleDevError(err, req, res);
   } else if (process.env.NODE_ENV == "production") {
     if (err.name == "CastError") err = handleCastErrorDB(err);
     if (err.name == "ValidationError") err = handleValidationErrorDB(err);
     if (err.code == 11000) err = handleDuplicateErrorDB(err);
 
-    handleProdError(err, res);
+    handleProdError(err, req, res);
   }
 };

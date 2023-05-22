@@ -2,3 +2,22 @@ extends base
 
 block content
     include _nav
+    .post__header.container.u-pt-medium.u-mb-medium
+        .post__author.u-mb-medium
+            .author__image
+                - if(!post.author.profilePhoto)
+                    img(src=`/img/users/default.jpg`, alt="No image")
+                - else
+                    img(src=`/img/users/${post.author.profilePhoto}`, alt="#{post.author.firstName}")
+            span.author__name.u-d-block.text--medium.text--faded= `${post.author.firstName} ${post.author.lastName}`
+            - let date = post.createdDate.toLocaleDateString('en-US', {year: 'numeric',month: 'long',day: 'numeric'})
+            span.date.u-d-block.text--small.text--faded= date
+
+        .post__header-text
+            h2.heading.u-mb-small= post.title
+            p.post__description.text--faded.text--big= post.description
+        
+
+    .post__body.container.u-pb-big
+        .image-container.u-mb-medium(style=`background-image: url('/img/blog-post/${post.photo}')`)
+        .post__details.text--faded!= post.body

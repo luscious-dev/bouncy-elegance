@@ -1,0 +1,14 @@
+nav.user-view__menu
+    ul.side-nav
+        li(class=`${active == "settings" ? 'side-nav--active': ''}`)
+            a(href="/me") Settings
+        li(class=`${active == "posts" ? 'side-nav--active': ''}`)
+            a(href="/posts") Posts
+        li(class=`${active == "create post" ? 'side-nav--active': ''}`)
+            a(href="/create-post") Create a post
+        li(class=`${active == "manage post" ? 'side-nav--active': ''}`)
+            a(href="#") Manage Posts
+        li(class=`${active == "statistics" ? 'side-nav--active': ''}`)
+            a(href="#") Statistics
+        li(class=`${active == "manage about" ? 'side-nav--active': ''}`)
+            a(href="#") Manage About Info

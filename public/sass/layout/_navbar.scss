@@ -19,6 +19,8 @@
   }
 
   &__accounts {
+    display: flex;
+    align-items: center;
     @include breakpoint-down(700px) {
       display: none;
     }
@@ -78,6 +80,44 @@
         bottom: 0;
         left: 0;
         background-color: var(--color-light);
+      }
+    }
+
+    &--cta {
+      text-transform: uppercase;
+      transition: all 0.4s ease-in-out;
+
+      &.sign-up {
+        border: 2px solid $color-primary-light;
+        border-radius: 50px;
+        transition: background-color 0.4s ease-in-out;
+        padding: 1rem 2.4rem;
+
+        &:hover {
+          background-color: $color-primary;
+          color: white;
+        }
+      }
+
+      &.profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      &:hover {
+        transform: translateY(-3px);
+      }
+    }
+
+    .profile__image {
+      width: 35px;
+      height: 35px;
+      overflow: hidden;
+      border-radius: 50%;
+
+      img {
+        max-width: 100%;
       }
     }
   }

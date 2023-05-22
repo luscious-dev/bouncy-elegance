@@ -36,7 +36,7 @@ class APIFeatures {
       const fieldString = this.queryParamsObj.fields.split(",").join(" ");
       this.query = this.query.select(fieldString);
     } else {
-      this.query = this.query.select("-__v -slug");
+      this.query = this.query.select("-__v -body ");
     }
     return this;
   }

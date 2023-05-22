@@ -1,0 +1,37 @@
+extends base
+
+block content
+    include _nav
+    .user-view.container.u-mt-medium.u-mb-big
+        include _side-nav
+        .user-view__content
+            .user-view__form-container
+                h2.heading.heading-secondary.heading--gradient Your account settings
+                form.form(action="#")
+                    .form__group 
+                        label.form__label First Name
+                        input.form__input#firstname(type="text")
+                    .form__group 
+                        label.form__label Last Name
+                        input.form__input#lastname(type="text")
+                    .form__group.form__photo-upload
+                        img.form__user-photo(src='/img/users/default.jpg' alt="User photo")
+                        a.btn-text Choose new Photo
+                    .form__group.u-right
+                        button.btn.btn--small.btn--primary Save Settings
+            .line &nbsp;
+            .user-view__form-container
+                h2.heading.heading-secondary.heading--gradient Change password
+                form.form(action="#")
+                    .form__group 
+                        label.form__label Current Password
+                        input.form__input#password-current(type="password" placeholder="******")
+                    .form__group 
+                        label.form__label New Password
+                        input.form__input#password(type="password" placeholder="******")
+                    .form__group 
+                        label.form__label Confirm Password
+                        input.form__input#password-confirm(type="password" placeholder="******")
+                    .form__group.u-right
+                        button.btn.btn--small.btn--primary Update password
+                    

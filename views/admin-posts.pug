@@ -1,0 +1,38 @@
+extends base
+
+
+block content
+    include _nav
+    .user-view.container.u-mt-medium.u-mb-big
+        include _side-nav
+        .user-view__content
+            .user-view__container
+                .user-view__header.u-d-flex.u-d-flex-align-ct.u-d-flex-justify-sb
+                    h2.heading.heading-secondary.heading--gradient Posts
+                    a.btn.btn--primary.btn--small Add new
+                .grid.grid--3.blog-posts
+                    each post in posts
+                        a.blog-posts__card(href=`/posts/${post.slug}/manage`)
+                            .card__image
+                                img(src=`/img/blog-post/${post.photo}`)
+                            .card__content
+                                .card__meta 
+                                    - let date = post.createdDate.toLocaleDateString('en-US', {year: 'numeric',month: 'long',day: 'numeric'})
+                                    span.date #{date}
+                                .card__text
+                                    h2.heading.heading--card= post.title
+                                .card__author
+                                    .author__image
+                                        - if(post.author.profilePhoto)
+                                            img(src=`/img/users/${post.author.profilePhoto}`)
+                                        - else
+                                            img(src="/img/users/default.jpg")
+                                    .author__name
+                                        strong= `${post.author.lastName} ${post.author.firstName}`
+                if(totalPages > 1)
+                    ul.pagination
+                        - for(let i=1; i <= totalPages; i++)
+                            li(class=`pagination__page ${currentPage == i ? 'pagination__page--active' : ''}`)
+                                a(href=`/posts?page=${i}`)= i
+                        
+                

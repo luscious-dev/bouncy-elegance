@@ -32,6 +32,18 @@ const limiter = rateLimit({
   message: "Too many requests from your PC. Try again in an hour!",
 });
 
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
+      connectSrc: ["'self'", "wss?:\\/\\/localhost:\\d+"],
+      // Add more directives as per your requirements
+    },
+  })
+);
+
 app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());

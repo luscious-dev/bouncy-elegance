@@ -12,5 +12,12 @@
 @import "./layout/footer";
 
 @import "./components/button";
+@import "./components/alerts";
+@import "./components/pagination";
+
 @import "./pages/home";
 @import "./pages/blog-home";
+@import "./pages/blog-post";
+@import "./pages/login";
+@import "./pages/error";
+@import "./pages/user-view";

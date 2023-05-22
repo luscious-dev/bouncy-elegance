@@ -32,20 +32,56 @@ a {
   font-family: "Noto Serif", serif;
   line-height: 1.6;
 }
+
 .heading {
   font-family: "Poppins", sans-serif;
-  text-transform: capitalize;
-  font-weight: 600;
-}
-.heading--primary {
-  font-size: 4.3rem;
-  margin-bottom: 2rem;
-  color: var(--color-dark);
 }
 
-.heading--secondary {
-  font-size: 3.6rem;
+.heading-primary {
+  font-size: 5rem;
+  margin-bottom: 2.5rem;
+  color: var(--color-dark);
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.heading-secondary {
+  font-size: 2.25rem;
   margin-bottom: 2rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.heading-tertiary {
+  font-size: 2.75rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.heading--gradient {
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from($color-secondary),
+    to($color-primary)
+  );
+  color: transparent;
+  background-image: linear-gradient(to right, $color-secondary, $color-primary);
+  -webkit-background-clip: text;
+}
+
+.heading--error {
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#ff7730),
+    to(#eb4d4b)
+  );
+  background-image: linear-gradient(to right, #ff7730, #eb4d4b);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .heading--card {
@@ -70,6 +106,10 @@ a {
 
 .text--big {
   font-size: 2.5rem;
+}
+
+.text--faded {
+  color: $color-grey-dark-1;
 }
 
 .paragraph-centered {

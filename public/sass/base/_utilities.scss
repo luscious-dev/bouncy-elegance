@@ -1,7 +1,7 @@
 .container {
   max-width: 1200px;
-  padding-left: 20px;
-  padding-right: 20px;
+  // padding-left: 20px;
+  // padding-right: 20px;
   margin: 0 auto;
 }
 
@@ -11,10 +11,24 @@
   gap: 30px 30px;
 }
 
+.grid--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .u-center {
   text-align: center !important;
 }
 
+.u-right {
+  text-align: right !important;
+}
+
+.u-img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+// MARGIN
 .u-mb-big {
   margin-bottom: 7rem !important;
 }
@@ -23,6 +37,37 @@
 }
 .u-mb-small {
   margin-bottom: 1rem !important;
+}
+
+.u-mt-big {
+  margin-top: 7rem !important;
+}
+.u-mt-medium {
+  margin-top: 4rem !important;
+}
+.u-mt-small {
+  margin-top: 1rem !important;
+}
+
+// PADDING
+.u-pt-big {
+  padding-top: 7rem !important;
+}
+.u-pt-medium {
+  padding-top: 4rem !important;
+}
+.u-pt-small {
+  padding-top: 1rem !important;
+}
+
+.u-pb-big {
+  padding-bottom: 7rem !important;
+}
+.u-pb-medium {
+  padding-bottom: 4rem !important;
+}
+.u-pb-small {
+  padding-bottom: 1rem !important;
 }
 
 .u-uppercase {
@@ -38,4 +83,15 @@
 }
 .u-d-flex-align-ct {
   align-items: center !important;
+}
+
+.u-d-block {
+  display: block;
+}
+
+.line {
+  margin: 6rem 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e0e0e0;
 }

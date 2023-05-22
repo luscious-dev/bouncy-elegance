@@ -93,7 +93,7 @@ BlogPostSchema.pre("save", function (next) {
   next();
 });
 
-BlogPostSchema.pre("find", function (next) {
+BlogPostSchema.pre(/^find/, function (next) {
   this.populate({
     path: "author",
     select: "firstName lastName role profilePhoto",

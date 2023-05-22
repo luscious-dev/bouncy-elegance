@@ -12,4 +12,15 @@ div.navbar.container
         +navbarItem("Blog", "/blog", true)
     
     .navbar__accounts
-        a.navbar__link.navbar__link--colored.navbar__link--underlined(href="#") Accounts
+        - if(!user)
+            a.navbar__link.navbar__link--colored.navbar__link--cta(href="/login") Login
+            a.navbar__link.navbar__link--colored.navbar__link--cta.sign-up(href="#") Sign up
+        - else
+            a.navbar__link.navbar__link--colored.navbar__link--cta#navbar__logout(href="#") Log out
+            a.navbar__link.navbar__link--colored.navbar__link--cta.profile(href="/me")
+                .profile__image
+                    - if(!user.profilePhoto)
+                        img(src=`/img/users/default.jpg`, alt="No image")
+                    - else
+                        img(src=`/img/users/${user.profilePhoto}`, alt="#{user.firstName}")
+                span= user.firstName

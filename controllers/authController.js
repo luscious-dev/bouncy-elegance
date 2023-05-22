@@ -55,36 +55,55 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Must provide email and password", 400));
   }
   const currentUser = await User.findOne({ email: email }).select("+password");
+
   if (
     !currentUser ||
-    !currentUser.correctPassword(password, currentUser.password)
+    !(await currentUser.correctPassword(password, currentUser.password))
   ) {
+    res.cookie("jwt", "nothing", Date.now() + 10 * 1000);
     return next(new AppError("Incorrect email or password", 401));
   }
 
   createSendToken(currentUser, 200, res);
 });
 
+exports.logout = (req, res, next) => {
+  res.cookie("jwt", "logged out", {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({
+    status: "success",
+  });
+};
+
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
 
   // 1. See if a token is available
   if (
-    !req.headers.authorization ||
-    !req.headers.authorization.startsWith("Bearer")
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
   ) {
+    token = req.headers.authorization.split(" ")[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
+  }
+
+  if (!token) {
     return next(
       new AppError("You are not logged in. Log in and try again!", 401)
     );
   }
 
-  token = req.headers.authorization.split(" ")[1];
-
   // 2. Verify token
-  const decoded = await util.promisify(jwt.verify)(
-    token,
-    process.env.JWT_SECRET
-  );
+  let decoded;
+
+  try {
+    decoded = await util.promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  } catch (e) {
+    return next(new AppError("You need to be logged in", 401));
+  }
 
   // 3. Check if user still exists
   const currentUser = await User.findById(decoded.id);
@@ -109,6 +128,46 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   next();
 });
+
+// Only for rendered pages and there are no errors!
+exports.isLoggedIn = async (req, res, next) => {
+  try {
+    let token;
+
+    // 1. See if a token is available
+    if (req.cookies.jwt) {
+      token = req.cookies.jwt;
+    }
+
+    if (!token) {
+      return next();
+    }
+
+    // 2. Verify token
+    const decoded = await util.promisify(jwt.verify)(
+      token,
+      process.env.JWT_SECRET
+    );
+
+    // 3. Check if user still exists
+    const currentUser = await User.findById(decoded.id);
+
+    if (!currentUser) {
+      return next();
+    }
+
+    // 4. Chech if password has not been changed since the last log in
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
+      return next();
+    }
+
+    // There is a logged in user
+    res.locals.user = currentUser;
+    return next();
+  } catch (err) {
+    return next();
+  }
+};
 
 exports.restrict = (...roles) => {
   return (req, res, next) => {
@@ -195,7 +254,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   }
 
   const { currentPassword, password, passwordConfirm } = req.body;
-  if (!(await user.correctPassword(user.password, currentPassword))) {
+  if (!(await user.correctPassword(currentPassword, user.password))) {
     return next(new AppError("Incorrect password", 401));
   }
 

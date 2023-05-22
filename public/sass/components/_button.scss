@@ -11,6 +11,11 @@
     font-size: 1.8rem;
     border-radius: 100px;
   }
+  &--small {
+    padding: 1.25rem 3rem !important;
+    font-size: 1.4rem !important;
+    border-radius: 100px;
+  }
 
   &--large-outlined {
     padding: 1rem 6rem;
@@ -56,7 +61,44 @@
   }
 
   &--primary {
-    background-color: var(--color-primary);
+    background-image: $gradient;
     color: var(--color-light);
   }
+}
+
+.btn-text {
+  color: $color-secondary;
+}
+
+.btn-text:link,
+.btn-text:visited {
+  color: $color-secondary;
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px solid $color-secondary;
+  padding: 3px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.btn-text:hover {
+  background-color: $color-secondary;
+  color: #fff;
+  -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.btn-text:active {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.btn-text:focus {
+  outline: none;
+  outline: 3px solid $color-secondary;
+  outline-offset: 3px;
 }

@@ -12,4 +12,9 @@ html {
 
 body {
   box-sizing: inherit;
+  min-height: 100vh;
+}
+
+main {
+  height: 100%;
 }
