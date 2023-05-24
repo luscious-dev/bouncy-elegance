@@ -94,6 +94,14 @@ router.get(
   })
 );
 
+router.get("/stats", (req, res, next) => {
+  res.status(200).render("blog-stats", {
+    title: "Stats",
+    active: "statistics",
+    colored: true,
+  });
+});
+
 router.get("/login", (req, res, next) => {
   res.status(200).render("login", { title: "Login", colored: true });
 });

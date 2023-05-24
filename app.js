@@ -36,8 +36,13 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        "https://fonts.googleapis.com",
+        "https://cdn.quilljs.com",
+      ],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
       connectSrc: ["'self'", "wss?:\\/\\/localhost:\\d+"],
       // Add more directives as per your requirements
     },

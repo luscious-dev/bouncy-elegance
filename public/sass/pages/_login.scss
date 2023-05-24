@@ -102,6 +102,11 @@
   transform: translateY(-2px);
 }
 
+.form__textarea {
+  width: 100%;
+  resize: none;
+}
+
 .btn,
 .btn:link,
 .btn:visited {

@@ -1,5 +1,7 @@
 extends base
 
+block append head
+    link(rel="stylesheet", href="/css/quill.snow.css")
 
 block content
     include _nav
@@ -7,9 +9,79 @@ block content
         include _side-nav
         .user-view__content
             .user-view__container
-                .user-view__header.u-d-flex.u-d-flex-align-ct.u-d-flex-justify-sb
+                .user-view__header.u-d-flex.u-d-flex-align-ct.u-d-flex-justify-sb.u-mb-medium
                     h2.heading.heading-secondary.heading--gradient Create Post
-                    a.btn.btn--primary.btn--small Save
-                
-                        
-                
+                    a#create-post.btn.btn--primary.btn--small Save
+                form.form.form--create-post
+                    .form__group
+                        label.form__label(for='title') Post Title
+                        input#title.form__input(type='text', placeholder='Title of latest post', required)
+                    .form__group
+                        label.form__label(for='description') Post Description
+                        textarea.form__textarea#description(name="", cols="30", rows="10") 
+
+                    .form__group
+                        label.form__label(for='editor') Post Body
+                        #toolbar
+                            //- Formatting tools
+                            button.ql-bold(title="Bold")
+                            button.ql-italic(title="Italic")
+                            button.ql-underline(title="Underline")
+                            button.ql-strike(title="Strike")
+
+                            //- Heading styles
+                            select.ql-header
+                                each level in [1, 2, 3, 4, 5, 6, false]
+                                    - selected = level === false
+                                    option(value=level selected= selected) #{level ? 'H' + level : 'Normal'}
+
+                            //- Text alignment
+                            select.ql-align
+                                option(value="")
+                                option(value="center")
+                                option(value="right")
+                                option(value="justify")
+
+                            //- Lists
+                            button.ql-list(value="bullet" title="Bullet List")
+                            button.ql-list(value="ordered" title="Numbered List")
+
+                            //- Block quote
+                            button.ql-blockquote(title="Block Quote")
+
+                            //- Insert/Edit link
+                            button.ql-link(title="Insert/Edit Link")
+
+                            //- Insert image
+                            button.ql-image(title="Insert Image")
+
+                            //- Code
+                            button.ql-code(title="Code")
+                            button.ql-code-block(title="Code Block")
+
+                            button(class=`ql-script` value="sub" title=`Sub`)  
+                            button(class=`ql-script` value="super" title=`Super`)  
+
+                            //- Clear formatting
+                            button.ql-clean(title="Clear Formatting")
+
+                        #editor
+
+                    .form__group
+                        label.form__label(for='thumbnail') Post Thumbnail
+                        input#thumbnail.form__input(type='file', required)
+
+                    .u-d-flex.u-d-flex-align-ct
+                        .toggle-group
+                            label Publish
+                            .button.r#button-1
+                                input.checkbox(type="checkbox" name="publish")
+                                .knobs= ""
+                                .layer= ""
+
+                        .toggle-group
+                            label Features
+                            .button.r#button-1
+                                input.checkbox(type="checkbox" name="feature")
+                                .knobs= ""
+                                .layer= ""
