@@ -42,18 +42,17 @@ const BlogPostSchema = Schema(
       default: false,
       required: true,
     },
+    featured: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
     createdDate: {
       type: Date,
       default: Date.now(),
     },
     tags: {
       type: Array,
-      validate: {
-        validator: function (arr) {
-          return arr.length <= 2; // Maximum 5 elements allowed
-        },
-        message: "Array length exceeds the maximum allowed length of 2",
-      },
     },
     visits: {
       type: Number,

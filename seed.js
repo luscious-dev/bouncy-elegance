@@ -12,7 +12,11 @@ mongoose
   });
 
 const categories = ["Sex", "Cancer", "Education", "Life", "Love", "Church"];
-const authors = ["Mrs Akin-Odanye", "Oluwakemi", "Oluwabukola", "Segun"];
+const authors = [
+  "641194335faa278c87d9f7e1",
+  "641dd50b06dc77512820b3d4",
+  "64649c5e246f02686c62f18f",
+];
 const img = [
   "1.png",
   "2.png",
@@ -47,10 +51,8 @@ const tags = [
 for (let i = 0; i < 11; i++) {
   let post = new BlogPost({
     title: `Lorem Ipsum dolor sit amet ${(i + Math.random()).toFixed(3)}`,
-    author: "64649c5e246f02686c62f18f",
-    body: `I love supporting the **[EFF](https://eff.org)**.
-        This is the *[Markdown Guide](https://www.markdownguide.org)*.
-        See the section on [\`code\`](#code).`,
+    author: authors[Math.floor(Math.random() * authors.length)],
+    body: `<h1>Lorem Ispsum dolor ma qui</h1><p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>`,
     photo: img[Math.floor(Math.random() * img.length)],
     category: categories[Math.floor(Math.random() * categories.length)],
     tags: (function () {

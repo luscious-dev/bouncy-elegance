@@ -2,13 +2,18 @@ nav.user-view__menu
     ul.side-nav
         li(class=`${active == "settings" ? 'side-nav--active': ''}`)
             a(href="/me") Settings
-        li(class=`${active == "posts" ? 'side-nav--active': ''}`)
-            a(href="/posts") Posts
-        li(class=`${active == "create post" ? 'side-nav--active': ''}`)
-            a(href="/create-post") Create a post
-        li(class=`${active == "statistics" ? 'side-nav--active': ''}`)
-            a(href="/stats") Statistics
-        li(class=`${active == "statistics" ? 'side-nav--active': ''}`)
-            a(href="/writer-requests") Writer Requests
-        li(class=`${active == "manage about" ? 'side-nav--active': ''}`)
-            a(href="#") Manage About Info
+        - if(user.role == "user")
+            li(class=`${active == "request" ? 'side-nav--active': ''}`)
+                a(href="#") Become a writer
+        - if(["admin","blog-owner","writer"].includes(user.role))
+            li(class=`${active == "posts" ? 'side-nav--active': ''}`)
+                a(href="/posts") Posts
+            li(class=`${active == "create post" ? 'side-nav--active': ''}`)
+                a(href="/create-post") Create a post
+        - if(["admin", "blog-owner"].includes(user.role))
+            li(class=`${active == "statistics" ? 'side-nav--active': ''}`)
+                a(href="/stats") Statistics
+            li(class=`${active == "writer requests" ? 'side-nav--active': ''}`)
+                a(href="/writer-requests") Writer Requests
+            li(class=`${active == "manage about" ? 'side-nav--active': ''}`)
+                a(href="#") Manage About Info

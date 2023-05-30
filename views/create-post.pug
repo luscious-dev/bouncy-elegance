@@ -19,6 +19,12 @@ block content
                     .form__group
                         label.form__label(for='description') Post Description
                         textarea.form__textarea#description(name="", cols="30", rows="10") 
+                    .form__group
+                        label.form__label(for='description') Post Category
+                        input#category.form__input(type='text', placeholder='Category', required)
+                    .form__group
+                        label.form__label(for='description') Post Tags (Separated by commas)
+                        input#tags.form__input(type='text', placeholder='Cars, Food, ...', required)
 
                     .form__group
                         label.form__label(for='editor') Post Body
@@ -75,13 +81,13 @@ block content
                         .toggle-group
                             label Publish
                             .button.r#button-1
-                                input.checkbox(type="checkbox" name="publish")
+                                input.checkbox#published(type="checkbox" name="publish")
                                 .knobs= ""
                                 .layer= ""
 
                         .toggle-group
                             label Features
                             .button.r#button-1
-                                input.checkbox(type="checkbox" name="feature")
+                                input.checkbox#featured(type="checkbox" name="feature")
                                 .knobs= ""
                                 .layer= ""

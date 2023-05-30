@@ -79,7 +79,6 @@ exports.logout = (req, res, next) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
-
   // 1. See if a token is available
   if (
     req.headers.authorization &&

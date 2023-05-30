@@ -9,7 +9,7 @@ block content
             .user-view__container
                 .user-view__header.u-d-flex.u-d-flex-align-ct.u-d-flex-justify-sb
                     h2.heading.heading-secondary.heading--gradient Posts
-                    a.btn.btn--primary.btn--small Add new
+                    a(href="/create-post").btn.btn--primary.btn--small Add new
                 .grid.grid--3.blog-posts
                     each post in posts
                         a.blog-posts__card(href=`/posts/${post.slug}/manage`)

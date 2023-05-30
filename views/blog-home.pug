@@ -16,7 +16,7 @@ block content
     section.blog-posts
         .container
             h2.heading.heading-primary.heading--gradient Here are some posts
-            .grid.grid--blog-posts
+            .grid.grid--blog-posts.u-mb-medium
                 each post in posts
                     a.blog-posts__card(href=`/blog/${post.slug}`)
                         .card__image
@@ -27,7 +27,6 @@ block content
                                     span.category #{tag}
                                     if i != post.tags.length - 1
                                         | , 
-                                //- span.date= `&mdash; ${May 15, 2023}`
                                 - let date = post.createdDate.toLocaleDateString('en-US', {year: 'numeric',month: 'long',day: 'numeric'})
                                 span.date &mdash; #{date}
                             .card__text
@@ -45,4 +44,10 @@ block content
                                         span CEO and founder
                                     - else
                                         span Writer
+            if(totalPages > 1)
+                ul.pagination
+                    - for(let i=1; i <= totalPages; i++)
+                        li(class=`pagination__page ${currentPage == i ? 'pagination__page--active' : ''}`)
+                            a(href=`/blog?page=${i}`)= i
+
 

@@ -7,13 +7,13 @@ block content
         .user-view__content
             .user-view__form-container
                 h2.heading.heading-secondary.heading--gradient Your account settings
-                form.form(action="#")
+                form#user-name.form(action="#")
                     .form__group 
                         label.form__label First Name
-                        input.form__input#firstname(type="text")
+                        input.form__input#firstname(type="text" value= user.firstName)
                     .form__group 
                         label.form__label Last Name
-                        input.form__input#lastname(type="text")
+                        input.form__input#lastname(type="text" value= user.lastName)
                     .form__group.form__photo-upload
                         img.form__user-photo(src='/img/users/default.jpg' alt="User photo")
                         a.btn-text Choose new Photo
@@ -22,7 +22,7 @@ block content
             .line &nbsp;
             .user-view__form-container
                 h2.heading.heading-secondary.heading--gradient Change password
-                form.form(action="#")
+                form#user-password.form(action="#")
                     .form__group 
                         label.form__label Current Password
                         input.form__input#password-current(type="password" placeholder="******")

@@ -6,6 +6,30 @@ const BlogPostVisits = require("../models/BlogPostVisits");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const User = require("../models/User");
+const multer = require("multer");
+
+const multerStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/img/blog-post");
+  },
+  filename: function (req, file, cb) {
+    let ext = file.mimetype.split("/")[1];
+    cb(null, `post-${req.user._id}-${Date.now()}.${ext}`);
+  },
+});
+
+const multerLimit = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(new AppError("You should only upload images", 400), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  limits: multerLimit,
+});
 
 exports.getAllPosts = catchAsync(async (req, res) => {
   const features = new APIFeatures(BlogPosts.find(), req.query);
@@ -40,7 +64,14 @@ exports.getPost = catchAsync(async (req, res) => {
   });
 });
 
-exports.createBlogPost = catchAsync(async (req, res) => {
+exports.uploadBlogPostPhoto = upload.single("photo");
+
+exports.createBlogPost = catchAsync(async (req, res, next) => {
+  req.body.author = req.user._id;
+
+  if (!req.file) return next(new AppError("Must have a Blog post image", 400));
+  req.body.photo = req.file.filename;
+
   const newPost = await BlogPosts.create(req.body);
 
   res.status(201).json({
@@ -51,7 +82,10 @@ exports.createBlogPost = catchAsync(async (req, res) => {
   });
 });
 
-exports.updateBlogPost = catchAsync(async (req, res) => {
+exports.updateBlogPost = catchAsync(async (req, res, next) => {
+  delete req.body.photo;
+  if (req.file) req.body.photo = req.file.filename;
+
   const blogPost = await BlogPosts.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
     new: true,
@@ -91,7 +125,7 @@ exports.ownsBlogPost = catchAsync(async (req, res, next) => {
   if (["admin", "blog-owner"].includes(user.role)) {
     return next();
   }
-  if (!user.isPostOwner(req.params.id)) {
+  if (!(await user.isPostOwner(req.params.id))) {
     return next(new AppError("You are not authorized to edit the post!", 403));
   }
   next();

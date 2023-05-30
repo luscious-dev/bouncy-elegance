@@ -12,6 +12,7 @@ router
   .post(
     authController.protect,
     authController.restrict("admin", "blog-owner", "writer"),
+    blogControllers.uploadBlogPostPhoto,
     blogControllers.createBlogPost
   );
 
@@ -22,6 +23,7 @@ router
     authController.protect,
     authController.restrict("admin", "blog-owner", "writer"),
     blogControllers.ownsBlogPost,
+    blogControllers.uploadBlogPostPhoto,
     blogControllers.updateBlogPost
   )
   .delete(

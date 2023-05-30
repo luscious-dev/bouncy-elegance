@@ -11,14 +11,23 @@ block content
             .user-view__container
                 .user-view__header.u-d-flex.u-d-flex-align-ct.u-d-flex-justify-sb.u-mb-medium
                     h2.heading.heading-secondary.heading--gradient Edit Post
-                    a#edit-post.btn.btn--primary.btn--small Save
+                    div
+                        a#edit-post.btn.btn--primary.btn--small(data-post-id=post._id) Save
+                        a#delete-post.btn.btn--primary.btn--small(data-post-id=post._id) Delete
                 form.form.form--edit-post
                     .form__group
                         label.form__label(for='title') Post Title
-                        input#title.form__input(type='text', placeholder='Title of latest post', required)
+                        input#title.form__input(type='text', placeholder='Title of latest post', value=post.title, required)
                     .form__group
                         label.form__label(for='description') Post Description
-                        textarea.form__textarea#description(name="", cols="30", rows="10") 
+                        textarea.form__textarea#description(name="",  cols="30", rows="5")
+                            | #{post.description}
+                    .form__group
+                        label.form__label(for='description') Post Category
+                        input#category.form__input(type='text', placeholder='Category', value=post.category required)
+                    .form__group
+                        label.form__label(for='description') Post Tags (Separated by commas)
+                        input#tags.form__input(type='text', value=`${post.tags.join(",")}` placeholder='Cars, Food, ...', required) 
 
                     .form__group
                         label.form__label(for='editor') Post Body
@@ -66,7 +75,9 @@ block content
                             button.ql-clean(title="Clear Formatting")
 
                         #editor
-
+                            | !{post.body}
+                            
+                    input(type="hidden", name="")
                     .form__group
                         label.form__label(for='thumbnail') Post Thumbnail
                         input#thumbnail.form__input(type='file', required)
@@ -75,14 +86,14 @@ block content
                         .toggle-group
                             label Publish
                             .button.r#button-1
-                                input.checkbox(type="checkbox" name="publish")
+                                input.checkbox#published(type="checkbox" name="publish" checked=post.published)
                                 .knobs= ""
                                 .layer= ""
 
                         .toggle-group
                             label Features
                             .button.r#button-1
-                                input.checkbox(type="checkbox" name="feature")
+                                input.checkbox#featured(type="checkbox" name="feature" checked=post.featured )
                                 .knobs= ""
                                 .layer= ""
                 

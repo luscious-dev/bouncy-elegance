@@ -1200,6 +1200,11 @@ a {
 .form__textarea {
   width: 100%;
   resize: none;
+  padding: 10px;
+}
+
+#edit-post {
+  margin-right: 10px;
 }
 
 .btn,

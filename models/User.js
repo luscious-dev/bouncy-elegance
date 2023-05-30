@@ -76,9 +76,8 @@ UserSchema.methods.correctPassword = async (sentPassword, currentPassword) => {
 UserSchema.methods.isPostOwner = async function (postid) {
   const blogPost = await BlogPost.findById(postid);
   if (blogPost) {
-    return blogPost.author == this._id;
+    return blogPost.author._id.equals(this._id);
   }
-  console.log("Called isPostOwner");
   return false;
 };
 

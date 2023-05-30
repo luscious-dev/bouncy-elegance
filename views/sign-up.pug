@@ -1,0 +1,25 @@
+extends base
+
+block content
+    include _nav
+    .container.u-pt-big.u-pb-big
+        .sign-up
+            h2.heading.heading-secondary.u-mb-medium Create an account
+            form.form.form--login
+                .form__group
+                    label.form__label(for='fname') First Name
+                    input#fname.form__input(type='text', name="firstName", placeholder='John', required)
+                .form__group
+                    label.form__label(for='lname') Last Name
+                    input#lname.form__input(type='text', name="lastName", placeholder='Doe', required)
+                .form__group
+                    label.form__label(for='email') Email address
+                    input#email.form__input(type='email', name="email", placeholder='you@example.com', required)
+                .form__group.ma-bt-md
+                    label.form__label(for='password') Password
+                    input#password.form__input(type='password', name="password", placeholder='••••••••', required, minlength='8')
+                .form__group.ma-bt-md
+                    label.form__label(for='confirm-password') Confirm Password
+                    input#confirm-password.form__input(type='password', name="passwordConfirm" placeholder='••••••••', required, minlength='8')
+                .form__group
+                    button.btn.btn--primary Login
