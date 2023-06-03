@@ -18,28 +18,30 @@ block content
             h2.heading.heading-primary.heading--gradient Here are some posts
             .grid.grid--blog-posts.u-mb-medium
                 each post in posts
-                    a.blog-posts__card(href=`/blog/${post.slug}`)
+                    a.blog-posts__card.home-card(href=`/blog/${post.slug}`)
                         .card__image
                             img(src=`/img/blog-post/${post.photo}`)
                         .card__content
-                            .card__meta 
-                                each tag, i in post.tags
-                                    span.category #{tag}
-                                    if i != post.tags.length - 1
-                                        | , 
-                                - let date = post.createdDate.toLocaleDateString('en-US', {year: 'numeric',month: 'long',day: 'numeric'})
+                            .card__meta
+                                span.tags.u-truncate-inline
+                                    each tag, i in post.tags
+                                        span.category #{tag}
+                                        if i != post.tags.length - 1
+                                            | , 
+                                    - let date = post.createdDate.toLocaleDateString('en-US', {year: 'numeric',month: 'long',day: 'numeric'})
                                 span.date &mdash; #{date}
                             .card__text
-                                h2.heading.heading--card= post.title
-                                p= post.description
+                                h2.u-truncate-line-2.heading.heading--card= post.title
+                                p.u-truncate-line-3= post.description
                             .card__author
                                 .author__image
-                                    - if(post.author.profilePhoto)
-                                        img(src=`/img/users/${post.author.profilePhoto}`)
-                                    - else
-                                        img(src="/img/users/default.jpg")
+                                    .img-wrapper
+                                        - if(post.author.profilePhoto)
+                                            img(src=`/img/users/${post.author.profilePhoto}`)
+                                        - else
+                                            img(src="/img/users/default.jpg")
                                 .author__name
-                                    strong= `${post.author.lastName} ${post.author.firstName}`
+                                    strong.u-truncate-inline= `${post.author.lastName} ${post.author.firstName}`
                                     - if(post.author.role == "blog-owner")
                                         span CEO and founder
                                     - else

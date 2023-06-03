@@ -16,6 +16,12 @@ router
     blogControllers.createBlogPost
   );
 
+router.get(
+  "/getGeneralStats",
+  authController.protect,
+  authController.restrict("admin"),
+  blogControllers.getGeneralStats
+);
 router
   .route("/:id")
   .get(blogControllers.getPost)
@@ -63,13 +69,6 @@ router.get(
   authController.protect,
   authController.restrict("admin"),
   blogControllers.getPostCategoriesByViews
-);
-
-router.get(
-  "/getGeneralStats",
-  authController.protect,
-  authController.restrict("admin"),
-  blogControllers.getGeneralStats
 );
 
 module.exports = router;

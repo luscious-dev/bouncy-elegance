@@ -1,19 +1,45 @@
 nav.user-view__menu
     ul.side-nav
         li(class=`${active == "settings" ? 'side-nav--active': ''}`)
-            a(href="/me") Settings
+            a(href="/me")
+                svg
+                    use(xlink:href=`/img/icons.svg#icon-settings`)
+                | Settings
         - if(user.role == "user")
             li(class=`${active == "request" ? 'side-nav--active': ''}`)
-                a(href="#") Become a writer
+                a(href="/become-a-writer") 
+                    svg
+                        use(xlink:href=`/img/icons.svg#icon-bubble`)
+                    | Become a writer
         - if(["admin","blog-owner","writer"].includes(user.role))
             li(class=`${active == "posts" ? 'side-nav--active': ''}`)
-                a(href="/posts") Posts
+                a(href="/posts") 
+                    svg
+                        use(xlink:href=`/img/icons.svg#icon-folder`)
+                    | Posts
             li(class=`${active == "create post" ? 'side-nav--active': ''}`)
-                a(href="/create-post") Create a post
+                a(href="/create-post")
+                    svg
+                        use(xlink:href=`/img/icons.svg#icon-edit`)
+                    | Create a post
         - if(["admin", "blog-owner"].includes(user.role))
-            li(class=`${active == "statistics" ? 'side-nav--active': ''}`)
-                a(href="/stats") Statistics
+            li(class=`${active == "writers" ? 'side-nav--active': ''}`)
+                a(href="/writers")
+                    svg
+                        use(xlink:href=`/img/icons.svg#icon-feather`) 
+                    | Writers
             li(class=`${active == "writer requests" ? 'side-nav--active': ''}`)
-                a(href="/writer-requests") Writer Requests
+                a(href="/writer-requests")
+                    svg
+                        use(xlink:href=`/img/icons.svg#icon-bell`)
+                    | Writer Requests
+            li(class=`${active == "statistics" ? 'side-nav--active': ''}`)
+                a(href="/stats")
+                    svg
+                        use(xlink:href=`/img/icons.svg#icon-bar-chart`)
+                    | Statistics
             li(class=`${active == "manage about" ? 'side-nav--active': ''}`)
-                a(href="#") Manage About Info
+                a(href="#")
+                    svg
+                        use(xlink:href=`/img/icons.svg#icon-info`)
+                    | Manage About Info

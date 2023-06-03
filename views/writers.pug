@@ -1,0 +1,39 @@
+extends base
+
+
+block content
+    include _nav
+    .user-view.container.u-mt-medium.u-mb-big
+        include _side-nav
+        .user-view__content
+            .user-view__container
+                h2.heading.heading-secondary.heading--gradient Writers
+                
+                - if(writers.length == 0)
+                        .no-results
+                            svg
+                                use(xlink:href=`img/icons.svg#icon-inbox`)
+                            h2.u-mt-small No writers have been added!
+                            
+                .cards.writer-grid.grid.grid--2
+                    each writer in writers
+                        .card.card--user
+                            .profile
+                                .img-wrapper
+                                    if writer.profilePhoto
+                                        img(src=`/img/users/${writer.profilePhoto}`)
+                                    else
+                                        img(src="/img/users/default.jpg")
+                            .user-info.u-truncate-inline
+                                h2.name.u-truncate-inline #{writer.firstName} #{writer.lastName}
+                                .email.u-truncate-inline= writer.email
+                                - let date = writer.dateCreated.toLocaleDateString('en-US', {year: 'numeric',month: 'long',day: 'numeric'})
+                                .joined.text--faded Joined in #{date}
+                                if writer.role == "writer"
+                                    button.card-btn(data-writer-id=writer._id) Remove writer
+                    
+
+
+
+
+

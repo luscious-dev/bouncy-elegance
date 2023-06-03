@@ -1,0 +1,13 @@
+.no-results {
+  margin: 0 auto;
+  background-color: $color-grey-light-1;
+  text-align: center;
+  padding: 5rem;
+  border-radius: 10px;
+
+  svg {
+    height: 6rem;
+    width: 6rem;
+    fill: $color-primary;
+  }
+}

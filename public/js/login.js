@@ -40,3 +40,22 @@ export const logout = () => {
       showAlert("error", "Error logging out! Try again");
     });
 };
+
+// Finish signuo
+export const signUp = (data) => {
+  axios
+    .post("/api/v1/users/signup", data)
+    .then((res) => {
+      console.log(res);
+      // SHow alert
+      showAlert("success", "Account created successfully!");
+
+      window.setTimeout(() => {
+        location.assign("/");
+      }, 1000);
+    })
+    .catch((err) => {
+      // How alert
+      showAlert("error", "Error creating account! Try again later");
+    });
+};

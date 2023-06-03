@@ -16,7 +16,10 @@ div.navbar.container
             a.navbar__link.navbar__link--colored.navbar__link--cta(href="/login") Login
             a.navbar__link.navbar__link--colored.navbar__link--cta.sign-up(href="/sign-up") Sign up
         - else
-            a.navbar__link.navbar__link--colored.navbar__link--cta#navbar__logout(href="#") Log out
+            a.navbar__link.navbar__link--colored.navbar__link--cta#navbar__logout(href="#") 
+                svg
+                    use(xlink:href=`/img/icons.svg#icon-log-out`)
+                | Log out
             a.navbar__link.navbar__link--colored.navbar__link--cta.profile(href="/me")
                 .profile__image
                     - if(!user.profilePhoto)

@@ -1,0 +1,18 @@
+extends base
+
+block content
+    p Hi #{firstName},
+    p Welcome to BouncyElegance,
+    p We're excited to have you as a new member of our community. By creating an account, you've unlocked a world of engaging content, insightful discussions, and exciting updates. Whether you're a seasoned reader or a first-time visitor, we're here to provide you with valuable articles, thought-provoking insights, and a platform to connect with fellow enthusiasts.
+    p Feel free to update your profile
+    table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+        tbody
+            tr
+                td(align='left')
+                    table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                        tbody
+                            tr
+                                td
+                                    a(href=`${url}`, target='_blank') User Profile
+    p Thank you for joining our blog community! We look forward to sharing knowledge, inspiration, and memorable experiences with you.
+    p - The BouncyElegance Team

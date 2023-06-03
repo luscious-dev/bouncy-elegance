@@ -8,7 +8,24 @@ block content
         .user-view__content
             .user-view__container
                 h2.heading.heading-secondary.heading--gradient Stats
-                
+
+
+                .grid.grid--2.stats-grid
+                    each stat in stats
+                        .card
+                            .box
+                                .icon-wrapper
+                                    svg
+                                        use(xlink:href=`/img/icons.svg#icon-${stat.icon}`)
+                                h3= stat.value
+                                p.lead= stat.name
+                    //- .card
+                    //-     .box
+                    //-         .icon-wrapper
+                    //-             svg
+                    //-                 use(xlink:href=`img/icons.svg#icon-bubble`)
+                    //-         h3 5,154
+                    //-         p.lead Page views
                 
                         
                 

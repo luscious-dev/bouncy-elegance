@@ -67,6 +67,10 @@ const UserSchema = new Schema({
     type: Boolean,
     default: true,
   },
+  dateCreated: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 UserSchema.methods.correctPassword = async (sentPassword, currentPassword) => {

@@ -1,0 +1,92 @@
+.card {
+  font-family: "Poppins", sans-serif;
+}
+
+.card--request {
+  margin: 0.5rem auto;
+  padding: 1.5rem;
+  //   max-width: 45rem;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  scroll-margin-top: calc(50px + 1.5rem);
+
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #d2dcef;
+  display: block;
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+  }
+}
+
+.card--user {
+  display: flex;
+  gap: 25px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  align-items: center;
+  max-width: 100%;
+
+  .profile {
+    flex: 0 0 30%;
+  }
+
+  .img-wrapper {
+    position: relative;
+    padding: 0 0 100%;
+    height: 0;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  .user-info {
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+
+    .name {
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+
+    .email {
+      font-size: 1.6rem;
+      margin-bottom: 3px;
+    }
+
+    .joined {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+  }
+
+  .card-btn {
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    background-color: $color-primary;
+    color: white;
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: 3px solid transparent;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: white;
+      color: $color-primary;
+      border-color: $color-primary;
+    }
+  }
+}

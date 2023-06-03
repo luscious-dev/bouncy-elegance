@@ -121,3 +121,33 @@ exports.updateUser = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+exports.removeWriter = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.userId);
+  if (!user) {
+    return next(new AppError("No user found", 404));
+  }
+  user.role = "user";
+
+  await user.save({ validateBeforeSave: false });
+
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
+});
+
+// exports.acceptWriter = catchAsync(async (req, res, next) => {
+//   const user = await User.findById(req.params.userId);
+//   if (!user) {
+//     return next(new AppError("No user found", 404));
+//   }
+//   user.role = "writer";
+
+//   await user.save({ validateBeforeSave: false });
+
+//   res.status(204).json({
+//     status: "success",
+//     data: null,
+//   });
+// });

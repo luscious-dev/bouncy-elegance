@@ -1,0 +1,35 @@
+extends base
+
+
+block content
+    include _nav
+    .user-view.container.u-mt-medium.u-mb-big
+        include _side-nav
+        .user-view__content
+            .user-view__container
+                h2.heading.heading-secondary.heading--gradient Writer Requests
+                .cards.request-grid
+                    - if(requests.length == 0)
+                        .no-results
+                            svg
+                                use(xlink:href=`img/icons.svg#icon-inbox`)
+                            h2.u-mt-small No requests at this time
+                    each request in requests
+                        .card.card--request
+                            .card__content.u-d-flex.u-d-flex-justify-sb
+                                .u-d-flex.u-d-flex-column
+                                    h2 #{request.user.firstName} #{request.user.lastName}
+                                    - let date = request.requestDate.toLocaleDateString('en-US', {year: 'numeric',month: 'long',day: 'numeric'})
+                                    p.text--faded Tenderd &mdash;#{date}
+                                div
+                                    ul.u-list-reset.u-d-flex
+                                        li
+                                            button.btn.btn--regular.btn--primary.accept(data-request-id=request._id) Accept
+                                        li
+                                            button.btn.btn--regular.btn--outlined.reject(data-request-id=request._id) Reject
+                    
+
+
+
+
+

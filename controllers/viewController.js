@@ -2,6 +2,7 @@ const BlogPost = require("../models/BlogPosts");
 const AppError = require("../utils/appError");
 const APIFeatures = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
+const User = require("../models/User");
 
 exports.getBlogHome = catchAsync(async (req, res) => {
   // res.render("blog-home");
@@ -101,6 +102,14 @@ exports.getCreatePost = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getBecomeWriter = (req, res, next) => {
+  res.status(200).render("request-to-be-writer", {
+    title: "Become a writer",
+    active: "request",
+    colored: true,
+  });
+};
+
 exports.getLogin = (req, res, next) => {
   res.status(200).render("login", { title: "Login", colored: true });
 };
@@ -113,10 +122,30 @@ exports.getHome = (req, res) => {
   res.status(200).render("home", { title: "Home" });
 };
 
-exports.getStats = (req, res, next) => {
+exports.getStats = async (req, res, next) => {
+  // Number of users
+  const noOfUsers = (await User.find({})).length;
+  // Number of writers
+  const noOfWriters = (await User.find({ role: "writer" })).length;
+  // Number of posts
+  const noOfPosts = (await BlogPost.find({})).length;
+  // Last upload date
+  const noOfPublishedPosts = (await BlogPost.find({ published: true })).length;
+
+  const stats = [
+    { name: "Number of Users", value: noOfUsers, icon: "bubble" },
+    { name: "Number of Writers", value: noOfWriters, icon: "feather" },
+    { name: "Number of Posts", value: noOfPosts, icon: "edit" },
+    {
+      name: "Number of Published Posts",
+      value: noOfPublishedPosts,
+      icon: "mail",
+    },
+  ];
   res.status(200).render("blog-stats", {
     title: "Stats",
     active: "statistics",
     colored: true,
+    stats,
   });
 };

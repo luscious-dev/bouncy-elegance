@@ -9,19 +9,21 @@
                     li.footer__link
                         a(href="#") Contact Us
             .footer__logo Lizzie
-        
+
         .footer__column
             form
                 h3.u-mb-small.text--small Would you like to keep in touch?
                 p.footer__text.u-mb-small Sign up for new post and product offerings
                 .email-input
                     input(type="text", placeholder="Enter your email", name="subscribe-email")
-                    button Submit
+                    button
+                        svg
+                            use(xlink:href=`/img/icons.svg#icon-mail`)
 section.footer-meta
     .container.u-d-flex
         .footer-meta__column
             .footer-meta__text &copy; BouncyElegance #{new Date().getFullYear()}
-        
+
         .footer-meta__column
             ul.footer-meta__links
                 li

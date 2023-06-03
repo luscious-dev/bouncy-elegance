@@ -1,0 +1,52 @@
+.stats-grid {
+  .box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px;
+    text-align: center;
+    background-color: $color-primary;
+    padding: 1.5rem;
+  }
+  .icon-wrapper {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    font-size: 22px;
+    // padding: 15px;
+    top: -20px;
+    left: -15px;
+    background-color: rgba(255, 255, 255, 0.15);
+    line-height: 60px;
+    text-align: right;
+    border-radius: 50%;
+  }
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+    fill: var(--color-light);
+
+    position: absolute;
+    top: 50%;
+    right: 25%;
+  }
+
+  h3 {
+    color: var(--color-light);
+    font-size: 3rem;
+
+    &:after {
+      content: "";
+      height: 2px;
+      width: 70%;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.72);
+      display: block;
+      margin-top: 10px;
+    }
+  }
+  .lead {
+    font-size: 2rem;
+    color: var(--color-light);
+  }
+}

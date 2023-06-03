@@ -17,9 +17,19 @@ router.patch("/updateMyPassword", authController.updatePassword);
 
 router.patch("/updateMe", userController.updateMe);
 router.delete("/deleteMe", userController.deleteMe);
+router.delete(
+  "/:userId/removeWriter",
+  authController.restrict("admin", "blog-owner"),
+  userController.removeWriter
+);
+// router.patch(
+//   "/:userId/acceptWriter",
+//   authController.restrict("admin", "blog-owner"),
+//   userController.acceptWriter
+// );
 router.get("/me", userController.getMe, userController.getUser);
 
-// Restriced to admin only
+// Restricetd to admin only
 router.use(authController.restrict("admin"));
 router
   .route("/:id")

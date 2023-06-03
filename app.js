@@ -14,6 +14,7 @@ const blogRoute = require("./routes/blogRoute");
 const userRoute = require("./routes/userRoute");
 const commentRoute = require("./routes/commentRoute");
 const viewRoute = require("./routes/viewRoute");
+const writerRequestRoute = require("./routes/writerRequestRoute");
 const globalErrorHandler = require("./controllers/errorController");
 
 app.set("view engine", "pug");
@@ -53,11 +54,29 @@ app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
 
+// Automatically login users incase they use a different brouser
+app.use((req, res, next) => {
+  if (req.query.token) {
+    const cookieOptions = {
+      httpOnly: true,
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+      ),
+    };
+    if (process.env.NODE_ENV == "production") {
+      cookieOptions.secure = true;
+    }
+    res.cookie("jwt", req.query.token, cookieOptions);
+  }
+  next();
+});
+
 app.use("/api", limiter);
 
 app.use("/api/v1/blog/posts", blogRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/comments", commentRoute);
+app.use("/api/v1/writer-request", writerRequestRoute);
 
 app.use("/", viewRoute);
 

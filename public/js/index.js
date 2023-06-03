@@ -1,12 +1,25 @@
 import "@babel/polyfill";
-import { login, logout } from "./login";
+import { login, logout, signUp } from "./login";
 import { updateUser } from "./updateSettings";
 import { createPost, editPost, deletePost } from "./create-post";
+import {
+  sendWriterRequest,
+  acceptWriter,
+  rejectWriter,
+} from "./writerRequest,";
 import { getQuillInstance, getHTMLContent, renderHTMLContent } from "./editor";
+import { removeWriter } from "./removeWriter";
 
 // DOM ELEMENTS
 const loginForm = document.querySelector(".form--login");
 const logOutBtn = document.querySelector("#navbar__logout");
+
+const signupForm = document.querySelector(".form--signup");
+
+const writerGrid = document.querySelector(".writer-grid");
+const requestGrid = document.querySelector(".request-grid");
+
+const writerRequestForm = document.querySelector(".form--writer-request");
 
 const updateUserNameForm = document.querySelector("#user-name");
 const updateUserPasswordForm = document.querySelector("#user-password");
@@ -64,10 +77,11 @@ if (createPostForm) {
       return tmp.charAt(0).toUpperCase() + tmp.slice(1);
     });
 
-    form.append("tags", newTags);
+    form.append("tags", JSON.stringify(newTags));
     await createPost(form);
   });
 }
+
 if (editPostForm) {
   let editor = getQuillInstance("editor");
   editPostBtn.addEventListener("click", async function (e) {
@@ -90,7 +104,7 @@ if (editPostForm) {
       return tmp.charAt(0).toUpperCase() + tmp.slice(1);
     });
 
-    form.append("tags", newTags);
+    form.append("tags", JSON.stringify(newTags));
 
     await editPost(form, editPostBtn.dataset.postId);
   });
@@ -103,6 +117,58 @@ if (editPostForm) {
     } else {
     }
   });
+}
+
+if (writerRequestForm) {
+  // Add event literne
+  writerRequestForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const message = document.querySelector("#message");
+    sendWriterRequest({ message: message.value });
+
+    message.value = "";
+  });
+}
+
+if (writerGrid) {
+  const buttons = document.querySelectorAll(".card-btn");
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", (e) => {
+      e.preventDefault();
+
+      removeWriter(
+        e.target.dataset.writerId,
+        e.target.parentElement.parentElement
+      );
+    });
+  }
+}
+
+if (requestGrid) {
+  const acceptButtons = document.querySelectorAll(".accept");
+  const rejectButtons = document.querySelectorAll(".reject");
+
+  for (let i = 0; i < acceptButtons.length; i++) {
+    acceptButtons[i].addEventListener("click", (e) => {
+      e.preventDefault();
+
+      acceptWriter(
+        e.target.dataset.requestId,
+        e.target.closest(".card--request")
+      );
+    });
+  }
+
+  for (let i = 0; i < rejectButtons.length; i++) {
+    rejectButtons[i].addEventListener("click", (e) => {
+      e.preventDefault();
+
+      rejectWriter(
+        e.target.dataset.requestId,
+        e.target.closest(".card--request")
+      );
+    });
+  }
 }
 
 if (loginForm) {
@@ -118,6 +184,22 @@ if (loginForm) {
 if (logOutBtn) {
   logOutBtn.addEventListener("click", (e) => {
     e.preventDefault();
+
     logout();
+  });
+}
+
+if (signupForm) {
+  signupForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      email: document.getElementById("email").value,
+      firstName: document.getElementById("fname").value,
+      lastName: document.getElementById("lname").value,
+      password: document.getElementById("password").value,
+      passwordConfirm: document.getElementById("confirm-password").value,
+    };
+    signUp(data);
   });
 }

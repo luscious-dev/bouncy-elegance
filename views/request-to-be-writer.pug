@@ -1,0 +1,19 @@
+extends base
+
+
+block content
+    include _nav
+    .user-view.container.u-mt-medium.u-mb-big
+        include _side-nav
+        .user-view__content
+            .user-view__container
+                h2.heading.heading-secondary.heading--gradient Request to be a writer
+                form.form.form--writer-request
+                    .form__group
+                        label.form__label(for='description') Message
+                        textarea.form__textarea#message(name="", cols="30", rows="10") 
+                    .form__group
+                        button.btn.btn--small.btn--primary Send Request
+
+
+

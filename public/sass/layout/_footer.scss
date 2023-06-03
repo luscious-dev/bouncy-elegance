@@ -48,6 +48,7 @@
       font-family: "Poppins", sans-serif;
       font-size: 13px;
       flex-basis: 100%;
+      outline: none;
     }
 
     button {
@@ -58,6 +59,12 @@
       margin: 0;
       // height: 48px;
       border: none;
+
+      svg {
+        width: 3rem;
+        height: 3rem;
+        fill: var(--color-light);
+      }
     }
   }
 }

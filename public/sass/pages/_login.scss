@@ -8,6 +8,53 @@
   padding: 5rem 7rem;
   border-radius: 5px;
   font-family: "Poppins", sans-serif;
+
+  .btn,
+  .btn:link,
+  .btn:visited {
+    font-size: 1.6rem;
+    padding: 1.4rem 3rem;
+    border-radius: 10rem;
+    text-transform: uppercase;
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+    font-weight: 400;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    /*Add later when we use this for the button in form*/
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
+    -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  }
+
+  .btn:active {
+    -webkit-transform: translateY(-1px);
+    transform: translateY(-1px);
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+
+  .btn:focus {
+    outline: none;
+    //   background-color: $color-primary;
+  }
+
+  .btn--primary {
+    background-color: $color-primary;
+
+    &:hover {
+      background-color: #a80063;
+    }
+  }
 }
 
 .form__input {
@@ -109,51 +156,4 @@
 }
 #edit-post {
   margin-right: 10px;
-}
-
-.btn,
-.btn:link,
-.btn:visited {
-  font-size: 1.6rem;
-  padding: 1.4rem 3rem;
-  border-radius: 10rem;
-  text-transform: uppercase;
-  display: inline-block;
-  text-decoration: none;
-  position: relative;
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
-  font-weight: 400;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  /*Add later when we use this for the button in form*/
-  border: none;
-  cursor: pointer;
-}
-
-.btn:hover {
-  -webkit-transform: translateY(-3px);
-  transform: translateY(-3px);
-  -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-}
-
-.btn:active {
-  -webkit-transform: translateY(-1px);
-  transform: translateY(-1px);
-  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-}
-
-.btn:focus {
-  outline: none;
-  //   background-color: $color-primary;
-}
-
-.btn--primary {
-  background-color: $color-primary;
-
-  &:hover {
-    background-color: #a80063;
-  }
 }

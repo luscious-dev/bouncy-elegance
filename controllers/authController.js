@@ -5,7 +5,7 @@ const crypto = require("crypto");
 const catchAsync = require("../utils/catchAsync");
 const User = require("../models/User");
 const AppError = require("../utils/appError");
-const sendMail = require("../utils/email");
+const Email = require("../utils/email");
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -46,7 +46,33 @@ exports.signup = catchAsync(async (req, res) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
-  createSendToken(newUser, 200, res);
+
+  const token = signToken(newUser._id);
+
+  const cookieOptions = {
+    httpOnly: true,
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+  };
+  if (process.env.NODE_ENV == "production") {
+    cookieOptions.secure = true;
+  }
+
+  let url = `${req.protocol}://${req.get("host")}/me?token=${token}`;
+  const email = new Email(newUser, url);
+  email.sendWelcome();
+
+  res.cookie("jwt", token, cookieOptions);
+  newUser.password = undefined;
+
+  res.status(200).json({
+    status: "success",
+    token: token,
+    data: {
+      newUser,
+    },
+  });
 });
 
 exports.login = catchAsync(async (req, res, next) => {

@@ -67,12 +67,20 @@ exports.getPost = catchAsync(async (req, res) => {
 exports.uploadBlogPostPhoto = upload.single("photo");
 
 exports.createBlogPost = catchAsync(async (req, res, next) => {
-  req.body.author = req.user._id;
-
   if (!req.file) return next(new AppError("Must have a Blog post image", 400));
   req.body.photo = req.file.filename;
 
-  const newPost = await BlogPosts.create(req.body);
+  const newPost = await BlogPosts.create({
+    title: req.body.title,
+    author: req.user._id,
+    description: req.body.description,
+    body: req.body.body,
+    photo: req.body.photo,
+    category: req.body.category,
+    published: req.body.published,
+    featured: req.body.featured,
+    tags: JSON.parse(req.body.tags),
+  });
 
   res.status(201).json({
     status: "success",
@@ -86,6 +94,7 @@ exports.updateBlogPost = catchAsync(async (req, res, next) => {
   delete req.body.photo;
   if (req.file) req.body.photo = req.file.filename;
 
+  req.body.tags = JSON.parse(req.body.tags);
   const blogPost = await BlogPosts.findByIdAndUpdate(req.params.id, req.body, {
     runValidators: true,
     new: true,
