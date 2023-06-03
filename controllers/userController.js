@@ -1,6 +1,7 @@
 const catchAsync = require("../utils/catchAsync");
 const User = require("../models/User");
 const AppError = require("../utils/appError");
+const Email = require("../utils/email");
 
 const filterBody = function (body, ...fields) {
   const tmp_obj = {};
@@ -131,23 +132,11 @@ exports.removeWriter = catchAsync(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
+  const url = `${req.protocol}://${req.get("host")}/become-a-writer`;
+  await new Email(user, url).sendWriterRevoked();
+
   res.status(204).json({
     status: "success",
     data: null,
   });
 });
-
-// exports.acceptWriter = catchAsync(async (req, res, next) => {
-//   const user = await User.findById(req.params.userId);
-//   if (!user) {
-//     return next(new AppError("No user found", 404));
-//   }
-//   user.role = "writer";
-
-//   await user.save({ validateBeforeSave: false });
-
-//   res.status(204).json({
-//     status: "success",
-//     data: null,
-//   });
-// });

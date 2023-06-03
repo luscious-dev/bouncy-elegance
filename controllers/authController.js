@@ -221,11 +221,13 @@ exports.forgotPassword = async (req, res, next) => {
   const message = `A password reset was issued. Follow this link to reset your password ${resetUrl} \n If you issued no such requests, ignore this email`;
 
   try {
-    await sendMail({
-      email: currentUser.email,
-      text: message,
-      subject: "Password reset request (Expires in 10mins)",
-    });
+    const email = new Email(currentUser, resetUrl);
+    await email.sendPasswordReset();
+    // await sendMail({
+    //   email: currentUser.email,
+    //   text: message,
+    //   subject: "Password reset request (Expires in 10mins)",
+    // });
 
     res.status(200).json({
       status: "success",

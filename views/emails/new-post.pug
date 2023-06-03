@@ -1,0 +1,22 @@
+extends base
+
+block content
+    p Hello #{firstName},
+    p We are delighted to announce our latest blog post, titled "#{post.title}".
+    p Here's a sneak peek into the description of the article:
+    ul
+        li= post.description
+    p To read the full blog post, simply click the button below
+    table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+        tbody
+            tr
+                td(align='left')
+                    table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                        tbody
+                            tr
+                                td
+                                    a(href=`${url}`, target='_blank') Visit Post
+    p Stay tuned for more exciting updates, informative articles, and engaging discussions in the coming weeks. We're dedicated to delivering quality content that enriches your reading experience.
+    p Thank you for being a part of our blog community, and we hope you enjoy reading our latest post!
+    p Best Regards,
+    p - The BouncyElegance Team

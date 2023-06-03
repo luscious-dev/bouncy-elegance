@@ -8,6 +8,8 @@ const AppError = require("../utils/appError");
 const User = require("../models/User");
 const multer = require("multer");
 
+const Email = require("../utils/email");
+
 const multerStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/img/blog-post");
@@ -81,6 +83,17 @@ exports.createBlogPost = catchAsync(async (req, res, next) => {
     featured: req.body.featured,
     tags: JSON.parse(req.body.tags),
   });
+
+  if (newPost.published) {
+    const users = await User.find({ role: { $in: ["writer", "user"] } });
+
+    let promiseArr = users.map(async (user) => {
+      const url = `${req.protocol}://${req.get("host")}/blog/${newPost.slug}`;
+      await new Email(user, url, newPost).sendNewPostUpdate();
+    });
+
+    await Promise.all(promiseArr);
+  }
 
   res.status(201).json({
     status: "success",

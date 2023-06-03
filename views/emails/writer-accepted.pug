@@ -1,0 +1,19 @@
+extends base
+
+block content
+    p Hello #{firstName},
+    p We are delighted to inform you that your request to be a writer has been accepted.
+    p You are now allowed to create posts
+
+    table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+        tbody
+            tr
+                td(align='left')
+                    table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                        tbody
+                            tr
+                                td
+                                    a(href=`${url}`, target='_blank') Create a post
+   
+    p Best Regards,
+    p - The BouncyElegance Team

@@ -136,6 +136,7 @@ if (writerGrid) {
     buttons[i].addEventListener("click", (e) => {
       e.preventDefault();
 
+      e.target.textContent = "working...";
       removeWriter(
         e.target.dataset.writerId,
         e.target.parentElement.parentElement
@@ -152,6 +153,7 @@ if (requestGrid) {
     acceptButtons[i].addEventListener("click", (e) => {
       e.preventDefault();
 
+      e.target.textContent = "working...";
       acceptWriter(
         e.target.dataset.requestId,
         e.target.closest(".card--request")
@@ -163,6 +165,7 @@ if (requestGrid) {
     rejectButtons[i].addEventListener("click", (e) => {
       e.preventDefault();
 
+      e.target.textContent = "working...";
       rejectWriter(
         e.target.dataset.requestId,
         e.target.closest(".card--request")

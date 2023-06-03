@@ -24176,6 +24176,7 @@ if (writerGrid) {
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", function (e) {
       e.preventDefault();
+      e.target.textContent = "working...";
       (0, _removeWriter.removeWriter)(e.target.dataset.writerId, e.target.parentElement.parentElement);
     });
   }
@@ -24186,12 +24187,14 @@ if (requestGrid) {
   for (var _i = 0; _i < acceptButtons.length; _i++) {
     acceptButtons[_i].addEventListener("click", function (e) {
       e.preventDefault();
+      e.target.textContent = "working...";
       (0, _writerRequest.acceptWriter)(e.target.dataset.requestId, e.target.closest(".card--request"));
     });
   }
   for (var _i2 = 0; _i2 < rejectButtons.length; _i2++) {
     rejectButtons[_i2].addEventListener("click", function (e) {
       e.preventDefault();
+      e.target.textContent = "working...";
       (0, _writerRequest.rejectWriter)(e.target.dataset.requestId, e.target.closest(".card--request"));
     });
   }
@@ -24262,7 +24265,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57243" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49418" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
