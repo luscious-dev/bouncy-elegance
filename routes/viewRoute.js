@@ -1,11 +1,7 @@
 const express = require("express");
-
 const router = express.Router();
 const authController = require("../controllers/authController");
 const viewController = require("../controllers/viewController");
-const User = require("../models/User");
-const WriterRequest = require("../models/WriterRequest");
-const catchAsync = require("../utils/catchAsync");
 
 router.use(authController.isLoggedIn);
 router.get("/blog", viewController.getBlogHome);
@@ -57,39 +53,18 @@ router.get(
   "/writer-requests",
   authController.protect,
   authController.restrict("admin", "blog-owner"),
-  catchAsync(async (req, res, next) => {
-    const requests = await WriterRequest.find({}).populate("user");
-
-    res.status(200).render("writer-requests", {
-      colored: true,
-      active: "writer requests",
-      title: "Writer Requests",
-      requests,
-    });
-  })
+  viewController.getWriterRequest
 );
 router.get(
   "/writers",
   authController.protect,
   authController.restrict("admin", "blog-owner"),
-  catchAsync(async (req, res, next) => {
-    const data = await User.find({
-      role: { $in: ["writer", "admin", "blog-owner"] },
-    });
-    res.status(200).render("writers", {
-      colored: true,
-      active: "writers",
-      title: "Writers",
-      writers: data,
-    });
-  })
+  viewController.getWriters
 );
 
 router.get("/login", viewController.getLogin);
 router.get("/sign-up", viewController.getSignUp);
-router.get("/about", (req, res, next) => {
-  res.status(200).render("about", { colored: true, title: "About" });
-});
+router.get("/about", viewController.getAbout);
 
 router.get("/", viewController.getHome);
 

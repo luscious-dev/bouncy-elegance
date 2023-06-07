@@ -8,6 +8,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const app = express();
+const compression = require("compression");
 
 const AppError = require("./utils/appError");
 const blogRoute = require("./routes/blogRoute");
@@ -53,6 +54,8 @@ app.use(
 app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
+
+app.use(compression());
 
 // Automatically login users incase they use a different brouser
 app.use((req, res, next) => {

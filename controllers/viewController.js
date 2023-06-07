@@ -3,6 +3,7 @@ const AppError = require("../utils/appError");
 const APIFeatures = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
 const User = require("../models/User");
+const WriterRequest = require("../models/WriterRequest");
 const BlogPostComments = require("../models/BlogPostComments");
 
 exports.getBlogHome = catchAsync(async (req, res) => {
@@ -133,6 +134,29 @@ exports.getBecomeWriter = (req, res, next) => {
   });
 };
 
+exports.getWriters = catchAsync(async (req, res, next) => {
+  const data = await User.find({
+    role: { $in: ["writer", "admin", "blog-owner"] },
+  });
+  res.status(200).render("writers", {
+    colored: true,
+    active: "writers",
+    title: "Writers",
+    writers: data,
+  });
+});
+
+exports.getWriterRequest = catchAsync(async (req, res, next) => {
+  const requests = await WriterRequest.find({}).populate("user");
+
+  res.status(200).render("writer-requests", {
+    colored: true,
+    active: "writer requests",
+    title: "Writer Requests",
+    requests,
+  });
+});
+
 exports.getLogin = (req, res, next) => {
   res.status(200).render("login", { title: "Login", colored: true });
 };
@@ -146,6 +170,10 @@ exports.getHome = async (req, res) => {
     createdDate: -1,
   });
   res.status(200).render("home", { title: "Home", posts });
+};
+
+exports.getAbout = (req, res, next) => {
+  res.status(200).render("about", { colored: true, title: "About" });
 };
 
 exports.getStats = async (req, res, next) => {
