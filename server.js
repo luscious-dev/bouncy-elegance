@@ -21,7 +21,7 @@ mongoose
     console.log("MONGO CONNECTION UNSUCCESSFUL", err);
   });
 
-const port = process.env.APP_PORT || 8000;
+const port = process.env.PORT || 8000;
 
 const server = app.listen(process.env.APP_PORT, () => {
   console.log(`LISTENING ON PORT ${port}...`);
