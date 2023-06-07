@@ -8,11 +8,15 @@ router
   .get(commentController.getAllComments)
   .post(authController.protect, commentController.createComment);
 
-router.post("/:id/reply", authController.protect, commentController.addReply);
+router.post(
+  "/:postid/reply",
+  authController.protect,
+  commentController.addReply
+);
 
 router
   .route("/:id")
-  .get(commentController.getComment)
+  .get(authController.isLoggedIn, commentController.getComment)
   .delete(commentController.deleteComment);
 
 module.exports = router;

@@ -24,6 +24,10 @@ a {
     font-size: 5rem;
     text-align: center;
   }
+  @include breakpoint-down(400px) {
+    font-size: 4.4rem;
+    text-align: center;
+  }
 }
 
 .hero__description {
@@ -31,6 +35,10 @@ a {
   color: var(--color-light);
   font-family: "Noto Serif", serif;
   line-height: 1.6;
+
+  @include breakpoint-down(400px) {
+    font-size: 2rem;
+  }
 }
 
 .heading {
@@ -43,6 +51,13 @@ a {
   color: var(--color-dark);
   text-transform: uppercase;
   font-weight: 300;
+
+  @include breakpoint-down(800px) {
+    font-size: 4rem;
+  }
+  @include breakpoint-down(400px) {
+    font-size: 3.5rem;
+  }
 }
 
 .heading-secondary {
@@ -106,6 +121,10 @@ a {
 
 .text--big {
   font-size: 2.5rem;
+
+  @include breakpoint-down(400px) {
+    font-size: 2.3rem;
+  }
 }
 
 .text--faded {

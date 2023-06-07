@@ -2,7 +2,11 @@ mixin navbarItem(text, href="#", active=false)
     li.navbar__item
         a(href=`${href}`, class=`navbar__link navbar__link--colored navbar__link--animated ${active ? 'navbar__link--active':''}`)= text
 
-div.navbar.container
+mixin navbarMenuItem(text, href="#", active=false)
+    li
+        a(href=`${href}`, class=`navbar__link navbar__link--colored ${active ? 'navbar__link--active':''}` id=`${text=='Log out' ? 'navbar-menu__logout':''}`)= text
+
+div.navbar.container.u-padding-mobile
     div.navbar__logo-box
         a(href="/" class=`navbar__link navbar__link--logo ${colored ? 'navbar__link--colored':''}`) Lizzie
 
@@ -10,6 +14,25 @@ div.navbar.container
         +navbarItem("Home", "/", true)
         +navbarItem("About")
         +navbarItem("Blog", "/blog", true)
+
+    ul.navbar__toggler
+        span.bar
+        span.bar
+        span.bar
+    
+    ul.navbar__menu
+        +navbarMenuItem("Home", "/", true)
+        +navbarMenuItem("About")
+        +navbarMenuItem("Blog", "/blog", true)
+        br
+        hr
+        br
+        - if(!user)
+            +navbarMenuItem("Login", "/login", true)
+            +navbarMenuItem("Sign up", "/sign-up", true)
+        - else
+            +navbarMenuItem("Log out", "#", true)
+            +navbarMenuItem("Profile", "/me", true)
     
     .navbar__accounts
         - if(!user)

@@ -27,16 +27,48 @@ exports.getAllComments = catchAsync(async (req, res, next) => {
 });
 
 exports.getComment = catchAsync(async (req, res, next) => {
-  const comment = await BlogPostComment.findById(req.params.id);
+  const comment = await BlogPostComment.findById(req.params.id).populate(
+    "replies"
+  );
 
   if (!comment) {
     return next(new AppError("No Comment Found With That ID!", 404));
   }
 
+  const tmp = { ...comment._doc };
+
+  if (!req.user) {
+    tmp["canDelete"] = false;
+  } else if (
+    req.user._id.equals(comment.user._id) ||
+    ["admin", "blog-owner"].includes(req.user.role)
+  ) {
+    tmp["canDelete"] = true;
+  } else {
+    tmp["canDelete"] = false;
+  }
+
+  // Adding a canDelete boolean to the replies
+  tmp.replies = tmp.replies.map((comment) => {
+    const tmp = { ...comment._doc };
+
+    if (!req.user) {
+      tmp["canDelete"] = false;
+    } else if (
+      req.user._id.equals(comment.user._id) ||
+      ["admin", "blog-owner"].includes(req.user.role)
+    ) {
+      tmp["canDelete"] = true;
+    } else {
+      tmp["canDelete"] = false;
+    }
+    return tmp;
+  });
+
   res.status(200).json({
     status: "success",
     data: {
-      comment,
+      comment: tmp,
     },
   });
 });
@@ -55,27 +87,49 @@ exports.deleteComment = catchAsync(async (req, res, next) => {
 
 exports.createComment = catchAsync(async (req, res, next) => {
   if (!req.params.postid) {
-    req.params.postid = req.body.blogPost;
+    req.params.postid = req.body.blogPostId;
   }
+
   const comment = await BlogPostComment.create({
     comment: req.body.comment,
     user: req.user._id,
     blogPost: req.params.postid,
   });
 
+  await comment.populate("user");
+
+  const tmp = { ...comment._doc };
+
+  if (!req.user) {
+    tmp["canDelete"] = false;
+  } else if (
+    req.user._id.equals(comment.user._id) ||
+    ["admin", "blog-owner"].includes(req.user.role)
+  ) {
+    tmp["canDelete"] = true;
+  } else {
+    tmp["canDelete"] = false;
+  }
+
   res.status(200).json({
     status: "success",
     data: {
-      comment,
+      comment: tmp,
     },
   });
 });
 
 exports.addReply = catchAsync(async (req, res, next) => {
-  console.log(req.body);
+  const newComment = await BlogPostComment.create({
+    comment: req.body.comment,
+    user: req.user._id,
+    blogPost: req.params.postid,
+    parent: req.body.commentId,
+  });
+
   const comment = await BlogPostComment.findByIdAndUpdate(
-    req.params.id,
-    { $push: { reply: { comment: req.body.comment, user: req.user._id } } },
+    req.body.commentId,
+    { $push: { replies: newComment._id } },
     { new: true }
   );
 
@@ -86,7 +140,7 @@ exports.addReply = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     data: {
-      comment,
+      newComment,
     },
   });
 });

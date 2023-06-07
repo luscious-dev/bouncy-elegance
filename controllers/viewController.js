@@ -3,6 +3,7 @@ const AppError = require("../utils/appError");
 const APIFeatures = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
 const User = require("../models/User");
+const BlogPostComments = require("../models/BlogPostComments");
 
 exports.getBlogHome = catchAsync(async (req, res) => {
   // res.render("blog-home");
@@ -32,9 +33,31 @@ exports.getBlogPost = catchAsync(async (req, res, next) => {
     return next(new AppError("Post not found", 404));
   }
 
-  res
-    .status(200)
-    .render("blog-post", { post, title: post.title, colored: true });
+  const out = await BlogPostComments.find({ blogPost: post._id });
+
+  // This was done to add in a 'canDelete' boolean
+  const comments = out.map((comment) => {
+    const tmp = { ...comment._doc };
+
+    if (!req.user) {
+      tmp["canDelete"] = false;
+    } else if (
+      req.user._id.equals(comment.user._id) ||
+      ["admin", "blog-owner"].includes(req.user.role)
+    ) {
+      tmp["canDelete"] = true;
+    } else {
+      tmp["canDelete"] = false;
+    }
+    return tmp;
+  });
+
+  res.status(200).render("blog-post", {
+    post,
+    title: post.title,
+    comments,
+    colored: true,
+  });
 });
 
 exports.getMe = (req, res, next) => {

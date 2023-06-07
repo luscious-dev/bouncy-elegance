@@ -153,6 +153,11 @@
   width: 100%;
   resize: none;
   padding: 10px;
+  outline: none;
+
+  &:focus {
+    border: 1px solid $color-primary;
+  }
 }
 #edit-post {
   margin-right: 10px;

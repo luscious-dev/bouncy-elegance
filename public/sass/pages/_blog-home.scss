@@ -1,10 +1,27 @@
 .banner {
   background-color: var(--color-secondary);
 
+  .container:not(.navbar) {
+    min-height: 400px;
+  }
+
   &__image {
     background-color: var(--color-primary);
     padding: 5vw;
+    padding-top: 7%;
     flex: 0 0 40%;
+
+    @include breakpoint-down(800px) {
+      // display: none;
+      padding-top: 11%;
+    }
+    @include breakpoint-down(700px) {
+      // display: none;
+      padding-top: 20%;
+    }
+    @include breakpoint-down(600px) {
+      display: none;
+    }
   }
 
   img {
@@ -13,6 +30,10 @@
 
   &__text {
     padding-left: 10vw;
+
+    // @include breakpoint-down(920px) {
+    //   padding: 0;
+    // }
   }
 
   &__text-content {
@@ -20,6 +41,15 @@
 
     .heading {
       font-size: 3.6rem;
+
+      @include breakpoint-down(920px) {
+        // text-align: center;
+        font-size: 3.1rem;
+      }
+    }
+
+    @include breakpoint-down(600px) {
+      text-align: center;
     }
   }
 }
@@ -103,11 +133,7 @@
     align-items: center;
     gap: 15px;
     .author__image {
-      // display: flex;
-      // flex: 0 0 45px;
-      // width: 45px;
-      // height: 45px;
-      flex: 0 0 20%;
+      flex: 0 0 45px;
       border-radius: 50%;
       overflow: hidden;
 

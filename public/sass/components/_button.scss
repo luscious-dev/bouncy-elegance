@@ -28,6 +28,11 @@
     padding: 2rem 6rem;
     font-size: 1.8rem;
     border-radius: 100px;
+
+    @include breakpoint-down(400px) {
+      padding: 1.6rem 5rem;
+      font-size: 1.6rem;
+    }
   }
   &--small {
     padding: 1.25rem 3rem !important;

@@ -9,12 +9,19 @@
   background-repeat: no-repeat;
   background-size: cover;
 
+  // padding: 0 20px;
+
   &__content {
     display: flex;
     justify-content: space-between;
     // padding: 13rem 0rem;
     padding-top: 13rem;
     padding-bottom: 13rem;
+
+    @include breakpoint-down(400px) {
+      padding-top: 8rem;
+      padding-bottom: 8rem;
+    }
   }
 
   &__text-box {
@@ -59,7 +66,8 @@
     // display: flex;
     // justify-content: space-between;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 300px));
+    justify-content: center;
     gap: 30px;
 
     &__badge {
@@ -74,6 +82,14 @@
       right: 156px;
       transform: scale(0.7);
       transition: transform 0.4s ease-in-out;
+
+      @include breakpoint-down(1360px) {
+        right: 60px;
+      }
+      @include breakpoint-down(900px) {
+        right: 60px;
+        z-index: -1;
+      }
 
       &:hover {
         transform: scale(1.5);
@@ -129,6 +145,13 @@
       font-family: "Poppins", sans-serif;
       font-size: 1.8rem;
 
+      @include breakpoint-down(800px) {
+        font-size: 1.6rem;
+      }
+      @include breakpoint-down(400px) {
+        font-size: 1.3rem;
+      }
+
       ul {
         list-style-type: none;
       }
@@ -144,17 +167,46 @@
     justify-content: space-between;
     align-items: center;
 
+    @include breakpoint-down(770px) {
+      flex-direction: column;
+      font-size: 3rem;
+      gap: 40px;
+    }
     blockquote {
       margin-bottom: 5rem;
+
+      & > p {
+      }
     }
+
     // Text half
     &__text {
       max-width: 50%;
       font-family: "Poppins", sans-serif;
 
+      @include breakpoint-down(770px) {
+        order: 2;
+        max-width: 100%;
+        text-align: center;
+      }
+
       p {
         font-size: 3.7rem;
         font-weight: 400;
+
+        @include breakpoint-down(1090px) {
+          font-size: 3.2rem;
+        }
+        @include breakpoint-down(820px) {
+          font-size: 2.8rem;
+        }
+
+        // @include breakpoint-down(800px) {
+        //   font-size: 1.6rem;
+        // }
+        @include breakpoint-down(400px) {
+          font-size: 2.2rem;
+        }
       }
     }
 
@@ -165,6 +217,10 @@
     &__attribution {
       font-size: 2.6rem;
       font-weight: 600;
+
+      @include breakpoint-down(400px) {
+        font-size: 2.2rem;
+      }
 
       &--title {
         font-size: 2rem;
@@ -181,6 +237,11 @@
       img {
         width: 100%;
       }
+
+      @include breakpoint-down(770px) {
+        order: 1;
+        max-width: 60%;
+      }
     }
   }
 }
@@ -195,7 +256,15 @@
 
   .reviews-grid {
     display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
     justify-content: space-between;
+    padding: 0 0 15px 0;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .review {
@@ -204,6 +273,7 @@
     font-family: "Poppins", sans-serif;
     border-radius: 5px;
     transition: all 0.3s ease-in;
+    flex: 0 0 300px;
 
     &:not(:last-child) {
       margin-right: 5rem;
@@ -239,6 +309,15 @@
   padding: 8rem 0;
   background-color: var(--color-grey-light-1);
 
+  & > div > div {
+    @include breakpoint-down(900px) {
+      order: 1;
+      max-width: 60%;
+      flex-direction: column;
+      max-width: 100%;
+    }
+  }
+
   .preview-image {
     flex: 0 0 60%;
     max-width: 585px;
@@ -251,6 +330,10 @@
 
   .preview-blog-posts {
     flex: 0 1 550px;
+
+    @include breakpoint-down(900px) {
+      flex-basis: 0;
+    }
   }
 
   .blog-post {
@@ -263,11 +346,19 @@
 
     &__title {
       font-size: 2.3rem;
+
+      @include breakpoint-down(400px) {
+        font-size: 1.8rem;
+      }
     }
 
     &__link {
       color: var(--color-primary);
       font-size: 1.8rem;
+
+      @include breakpoint-down(400px) {
+        font-size: 1.4rem;
+      }
     }
   }
 }

@@ -2,6 +2,30 @@ const catchAsync = require("../utils/catchAsync");
 const User = require("../models/User");
 const AppError = require("../utils/appError");
 const Email = require("../utils/email");
+const multer = require("multer");
+
+const multerStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/img/users");
+  },
+  filename: function (req, file, cb) {
+    let ext = file.mimetype.split("/")[1];
+    cb(null, `user-${req.user._id}-${Date.now()}.${ext}`);
+  },
+});
+
+const multerLimit = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(new AppError("You should only upload images", 400), false);
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  limits: multerLimit,
+});
 
 const filterBody = function (body, ...fields) {
   const tmp_obj = {};
@@ -10,6 +34,8 @@ const filterBody = function (body, ...fields) {
   });
   return tmp_obj;
 };
+
+exports.uploadUserPhoto = upload.single("profilePhoto");
 
 exports.getAllUsers = catchAsync(async (req, res) => {
   const users = await User.find({ active: { $ne: false } });
@@ -46,8 +72,17 @@ exports.updateMe = catchAsync(async (req, res, next) => {
       )
     );
 
+  if (req.file) {
+    req.body.profilePhoto = req.file.filename;
+  }
+
   // Filter out the fields that are not allowed
-  const filteredBody = filterBody(req.body, "email", "lastName", "firstName");
+  const filteredBody = filterBody(
+    req.body,
+    "profilePhoto",
+    "lastName",
+    "firstName"
+  );
   const newUser = await User.findByIdAndUpdate(req.user._id, filteredBody, {
     new: true,
     runValidators: true,
@@ -90,7 +125,6 @@ exports.getUser = catchAsync(async (req, res, next) => {
 
 exports.deleteUser = catchAsync(async (req, res, next) => {
   const user = await User.findOneAndDelete(req.params.id);
-  console.log(user);
   if (!user) {
     return next(new AppError("User with the ID not found", 404));
   }

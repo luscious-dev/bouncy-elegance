@@ -5,6 +5,9 @@
   margin: 0 auto;
 }
 
+.u-padding-mobile {
+  padding: 0 30px;
+}
 .u-truncate-inline {
   white-space: nowrap;
   overflow: hidden;
@@ -36,6 +39,18 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 30px 30px;
+}
+
+.grid--blog-posts {
+  @include breakpoint-down(1070px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @include breakpoint-down(800px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @include breakpoint-down(500px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .grid--3 {

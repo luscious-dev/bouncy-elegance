@@ -10,7 +10,11 @@ const catchAsync = require("../utils/catchAsync");
 router.use(authController.isLoggedIn);
 router.get("/blog", viewController.getBlogHome);
 
-router.get("/blog/:post", viewController.getBlogPost);
+router.get(
+  "/blog/:post",
+  authController.isLoggedIn,
+  viewController.getBlogPost
+);
 
 router.get("/me", authController.protect, viewController.getMe);
 

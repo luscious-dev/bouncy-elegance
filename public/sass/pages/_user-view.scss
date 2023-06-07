@@ -11,6 +11,28 @@
   display: -ms-flexbox;
   display: flex;
 
+  .writer-grid {
+    @include breakpoint-down(700px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .stats-grid {
+    @include breakpoint-down(700px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &__menu-toggle {
+    position: absolute;
+    top: 108px;
+    right: 18px;
+    display: none;
+
+    @include breakpoint-down(900px) {
+      display: block;
+    }
+  }
+
   &__menu {
     -webkit-box-flex: 32rem;
     -ms-flex: 32rem 0 0px;
@@ -82,6 +104,19 @@
         margin-right: 2rem;
       }
     }
+
+    @include breakpoint-down(900px) {
+      // display: none;
+      position: fixed;
+      z-index: 5;
+      left: 0;
+      transform: translateX(-200%);
+      transition: all 0.3s ease-in-out;
+
+      &.open {
+        transform: translateX(0);
+      }
+    }
   }
 
   &__content {
@@ -90,17 +125,40 @@
     flex: 1;
     padding: 7rem 0;
     font-family: "Poppins", sans-serif;
+
+    .blog-posts {
+      @include breakpoint-down(1195px) {
+        grid-template-columns: 1fr 1fr;
+      }
+      @include breakpoint-down(550px) {
+        grid-template-columns: 1fr;
+      }
+    }
   }
 
   &__form-container {
     max-width: 68rem;
     margin: 0 auto;
     padding: 0 8rem;
+
+    @include breakpoint-down(650px) {
+      padding: 0 4rem;
+    }
+    @include breakpoint-down(500px) {
+      padding: 0 2rem;
+    }
   }
   &__container {
     max-width: 68rem;
     margin: 0 auto;
     padding: 0 8rem;
+
+    @include breakpoint-down(650px) {
+      padding: 0 4rem;
+    }
+    // @include breakpoint-down(500px) {
+    //   padding: 0 2rem;
+    // }
   }
   &__header {
     h1,

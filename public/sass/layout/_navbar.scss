@@ -15,7 +15,49 @@
     }
   }
 
-  &__item {
+  &__toggler {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: black;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    @include breakpoint-down(700px) {
+      display: block;
+    }
+  }
+
+  &__menu {
+    width: 80%;
+    position: absolute;
+    list-style: none;
+    background-color: white;
+    top: 81px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    border-top: 2px solid $color-primary;
+    padding: 3rem 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    // display: none;
+    transform: translateY(-200%);
+    transition: all 0.3s ease-in-out;
+    z-index: 10;
+
+    &.open {
+      // display: block;
+      transform: translateY(0);
+    }
+
+    @media screen and (min-width: 700px) {
+      display: none;
+    }
   }
 
   &__accounts {

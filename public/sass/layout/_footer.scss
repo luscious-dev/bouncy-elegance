@@ -5,6 +5,13 @@
   color: var(--color-dark);
   font-family: "Poppins", sans-serif;
 
+  & > div {
+    @include breakpoint-down(400px) {
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+
   &__column {
     flex: 1;
     &:first-child {

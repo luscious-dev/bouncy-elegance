@@ -3,7 +3,7 @@ extends base
 block content
     section.banner
         include _nav
-        .container.u-d-flex
+        .container.u-d-flex.u-padding-mobile
             .banner__image
                 img(src="/img/blog-post/1.png", alt="banner image")
             .banner__text.u-d-flex.u-d-flex-align-ct
@@ -14,7 +14,7 @@ block content
                         | Just enough information for everyone to come and be satisfied
 
     section.blog-posts
-        .container
+        .container.u-padding-mobile
             h2.heading.heading-primary.heading--gradient Here are some posts
             .grid.grid--blog-posts.u-mb-medium
                 each post in posts
@@ -40,7 +40,7 @@ block content
                                             img(src=`/img/users/${post.author.profilePhoto}`)
                                         - else
                                             img(src="/img/users/default.jpg")
-                                .author__name
+                                .author__name.u-truncate-inline
                                     strong.u-truncate-inline= `${post.author.lastName} ${post.author.firstName}`
                                     - if(post.author.role == "blog-owner")
                                         span CEO and founder

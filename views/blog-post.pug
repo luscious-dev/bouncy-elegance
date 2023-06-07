@@ -2,7 +2,7 @@ extends base
 
 block content
     include _nav
-    .post__header.container.u-pt-medium.u-mb-medium
+    .post__header.container.u-pt-medium.u-mb-medium.u-padding-mobile
         .post__author.u-mb-medium
             .author__image
                 - if(!post.author.profilePhoto)
@@ -16,8 +16,41 @@ block content
         .post__header-text
             h2.heading.u-mb-small= post.title
             p.post__description.text--faded.text--big= post.description
-        
 
-    .post__body.container.u-pb-big
+
+    .post__body.container.u-pb-big.u-padding-mobile
         .image-container.u-mb-medium(style=`background-image: url('/img/blog-post/${post.photo}')`)
         .post__details.text--faded!= post.body
+
+    .post__comments.container.u-mb-big.u-padding-mobile
+        h2.heading.heading-secondary.heading--gradient Comments
+        each comment in comments
+            if comment.parent == null
+                .comment__container(data-comment-id=`${comment._id}`)
+
+                    .comment__card
+                        .author
+                            .author__image
+                                .img-wrapper
+                                    - if(comment.user.profilePhoto)
+                                        img(src=`/img/users/${post.author.profilePhoto}`)
+                                    - else
+                                        img(src="/img/users/default.jpg")
+                            .author__name
+                                strong #{comment.user.firstName} #{comment.user.lastName}
+                        .content
+                            p= comment.comment
+                            .comment__card-footer
+                                if comment.canDelete
+                                    div.delete Delete
+                                .show-replies Reply #{comment.replies.length}
+
+        if user
+            .comment__container#create-comment-container
+                form#send-comment
+                    textarea.comment.form__textarea.u-mb-small#comment(name="", placeholder="Comment on post...", rows="5")
+                    div
+                        button.btn.btn--regular.btn--primary(data-post-id=post._id) Submit
+        else
+            h2.u-center.u-mt-medium Login to add a comment
+

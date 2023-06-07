@@ -1,10 +1,10 @@
 @import "./base/base";
 
-@import "./base/utilities";
-
 @import "./abstracts/variables";
 @import "./abstracts/animation";
 @import "./abstracts/mixins";
+
+@import "./base/utilities";
 
 @import "./base/typography";
 
@@ -17,6 +17,7 @@
 @import "./components/toggle-btn";
 @import "./components/cards";
 @import "./components/no-results";
+@import "./components/comments";
 
 @import "./pages/home";
 @import "./pages/blog-home";

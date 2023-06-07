@@ -9,26 +9,24 @@ const BlogPostCommentSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   blogPost: {
     type: Schema.Types.ObjectId,
     ref: "BlogPosts",
+    required: true,
   },
 
-  reply: [
+  parent: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "BlogPostComment",
+    default: null,
+  },
+
+  replies: [
     {
-      comment: {
-        type: String,
-        required: true,
-      },
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-      dateCreated: {
-        type: Date,
-        default: Date.now(),
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "BlogPostComment",
     },
   ],
 
@@ -38,10 +36,16 @@ const BlogPostCommentSchema = new Schema({
   },
 });
 
+BlogPostCommentSchema.post("findOneAndDelete", async function (doc, next) {
+  const BlogPostComment = mongoose.model("BlogPostComment");
+  await BlogPostComment.deleteMany({ parent: doc._id });
+  next();
+});
+
 BlogPostCommentSchema.pre("find", function (next) {
   this.populate({
     path: "user",
-    select: "firstName lastName email",
+    select: "firstName lastName email profilePhoto",
   });
   next();
 });

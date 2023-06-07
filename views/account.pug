@@ -2,8 +2,9 @@ extends base
 
 block content
     include _nav
-    .user-view.container.u-mt-medium.u-mb-big
+    .user-view.container.u-mt-medium.u-mb-big.u-padding-mobile
         include _side-nav
+        
         .user-view__content
             .user-view__form-container
                 h2.heading.heading-secondary.heading--gradient Your account settings
@@ -15,8 +16,12 @@ block content
                         label.form__label Last Name
                         input.form__input#lastname(type="text" value= user.lastName)
                     .form__group.form__photo-upload
-                        img.form__user-photo(src='/img/users/default.jpg' alt="User photo")
-                        a.btn-text Choose new Photo
+                        if user.profilePhoto
+                            img.form__user-photo(src=`/img/users/${user.profilePhoto}` alt="User photo")
+                        else
+                            img.form__user-photo(src='/img/users/default.jpg' alt="User photo")
+                        input.form__upload#photo(type="file", name="photo", accept="image/*")
+                        label(for="photo") Choose new photo
                     .form__group.u-right
                         button.btn.btn--small.btn--primary Save Settings
             .line &nbsp;
