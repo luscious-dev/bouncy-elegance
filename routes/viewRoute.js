@@ -87,6 +87,9 @@ router.get(
 
 router.get("/login", viewController.getLogin);
 router.get("/sign-up", viewController.getSignUp);
+router.get("/about", (req, res, next) => {
+  res.status(200).render("about", { colored: true, title: "About" });
+});
 
 router.get("/", viewController.getHome);
 

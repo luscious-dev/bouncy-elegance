@@ -24,9 +24,15 @@
   }
   &__menu-toggle {
     position: absolute;
-    top: 108px;
+    top: 130px;
     right: 18px;
     display: none;
+
+    svg {
+      fill: $color-primary;
+      width: 30px;
+      height: 30px;
+    }
 
     @include breakpoint-down(900px) {
       display: block;

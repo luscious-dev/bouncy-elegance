@@ -85,23 +85,23 @@ block content
                 +reviewItem("Chiamaka Ngozi","By far the best prosthesis I've ever bought. Not too heavy and very durable")
                 +reviewItem("Chiamaka Ngozi","By far the best prosthesis I've ever bought. Not too heavy and very durable")
                 +reviewItem("Chiamaka Ngozi","By far the best prosthesis I've ever bought. Not too heavy and very durable")
-                
-    section.blog-section
-        .container.u-padding-mobile
-            h1.heading.heading-primary.heading--gradient.u-mb-small
-                | Check out my latest blog post
-            p.text--big.u-mb-medium
-                | There are lots of content for you. From educational contents to life advices.
+    - if(posts)          
+        section.blog-section
+            .container.u-padding-mobile
+                h1.heading.heading-primary.heading--gradient.u-mb-small
+                    | Check out my latest blog post
+                p.text--big.u-mb-medium
+                    | There are lots of content for you. From educational contents to life advices.
 
-            .u-d-flex.u-d-flex-justify-sb.u-d-flex-align-ct
-                .preview-image
-                    img(src="/img/DSC08578.jpg", alt="")
-                .preview-blog-posts
-                    .blog-post
-                        .blog-post__title.u-mb-small
-                            | How to feel good about yourself?
-                        a.blog-post__link(href="#") Read more &rArr;
-                    .blog-post
-                        .blog-post__title.u-mb-small
-                            | How can you get a career in clinical psychology?
-                        a.blog-post__link(href="#") Read more &rArr;
+                .u-d-flex.u-d-flex-justify-sb.u-d-flex-align-ct
+                    .preview-image
+                        img(src=`/img/blog-post/${posts[0].photo}`, alt="Latest post photo")
+                    .preview-blog-posts
+                        - for(let i=0; i < 2; i++){
+                            - if(posts[i])
+                                .blog-post
+                                    .blog-post__title.u-mb-small
+                                        | #{posts[i].title}
+                                    a.blog-post__link(href=`/blog/${posts[i].slug}`) Read more &rArr;
+                        - }
+                    

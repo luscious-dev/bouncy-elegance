@@ -1835,9 +1835,14 @@ a {
 }
 .user-view__menu-toggle {
   position: absolute;
-  top: 108px;
+  top: 130px;
   right: 18px;
   display: none;
+}
+.user-view__menu-toggle svg {
+  fill: #ff218c;
+  width: 30px;
+  height: 30px;
 }
 @media screen and (max-width: 900px) {
   .user-view__menu-toggle {
@@ -2004,4 +2009,44 @@ a {
 .stats-grid .lead {
   font-size: 2rem;
   color: var(--color-light);
+}
+
+.about {
+  min-height: 90vh;
+  position: relative;
+  padding-top: 5rem;
+}
+.about h1 {
+  position: absolute;
+  transform-origin: top left;
+  transform: rotate(-90deg) translateX(-100%);
+  text-transform: capitalize;
+  font-size: 5rem;
+  font-family: "Noto Serif", serif;
+}
+.about .content {
+  margin-left: 100px;
+}
+.about .content__info {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+.about .content__info--1 img {
+  flex: 1;
+  max-width: 47rem;
+}
+.about .content__info--1 .text-content h2 {
+  font-size: 3.8rem;
+  font-family: "Noto Serif", serif;
+  margin-bottom: 1.8rem;
+  font-weight: 100;
+}
+.about .content__info--1 .text-content p {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.8rem;
+}
+.about .content__info--1 .text-content p:not(:last-of-type) {
+  margin-bottom: 1rem;
 }

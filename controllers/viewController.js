@@ -141,8 +141,11 @@ exports.getSignUp = (req, res, next) => {
   res.status(200).render("sign-up", { title: "Sign Up", colored: true });
 };
 
-exports.getHome = (req, res) => {
-  res.status(200).render("home", { title: "Home" });
+exports.getHome = async (req, res) => {
+  const posts = await BlogPost.find({ published: true }).sort({
+    createdDate: -1,
+  });
+  res.status(200).render("home", { title: "Home", posts });
 };
 
 exports.getStats = async (req, res, next) => {

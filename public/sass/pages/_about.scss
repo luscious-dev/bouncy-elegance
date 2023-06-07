@@ -1,0 +1,49 @@
+.about {
+  min-height: 90vh;
+  position: relative;
+  padding-top: 5rem;
+
+  h1 {
+    position: absolute;
+    transform-origin: top left;
+    transform: rotate(-90deg) translateX(-100%);
+    text-transform: capitalize;
+    font-size: 5rem;
+    font-family: "Noto Serif", serif;
+  }
+
+  .content {
+    margin-left: 100px;
+
+    &__info {
+      display: flex;
+      gap: 50px;
+      align-items: center;
+      margin-bottom: 5rem;
+
+      &--1 {
+        img {
+          flex: 1;
+          max-width: 47rem;
+        }
+
+        .text-content {
+          h2 {
+            font-size: 3.8rem;
+            font-family: "Noto Serif", serif;
+            margin-bottom: 1.8rem;
+            font-weight: 100;
+          }
+
+          p {
+            font-family: "Poppins", sans-serif;
+            font-size: 1.8rem;
+            &:not(:last-of-type) {
+              margin-bottom: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
