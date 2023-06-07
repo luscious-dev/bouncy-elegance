@@ -1,19 +1,19 @@
-mixin navbarItem(text, href="#", active=false)
+mixin navbarItem(text, href="#", active)
     li.navbar__item
-        a(href=`${href}`, class=`navbar__link navbar__link--colored navbar__link--animated ${active ? 'navbar__link--active':''}`)= text
+        a(href=`${href}`, class=`navbar__link navbar__link--colored navbar__link--animated ${active == title ? 'navbar__link--active':''}`)= text
 
-mixin navbarMenuItem(text, href="#", active=false)
+mixin navbarMenuItem(text, href="#", active)
     li
-        a(href=`${href}`, class=`navbar__link navbar__link--colored ${active ? 'navbar__link--active':''}` id=`${text=='Log out' ? 'navbar-menu__logout':''}`)= text
+        a(href=`${href}`, class=`navbar__link navbar__link--colored ${active == title ? 'navbar__link--active':''}` id=`${text=='Log out' ? 'navbar-menu__logout':''}`)= text
 
 div.navbar.container.u-padding-mobile
     div.navbar__logo-box
         a(href="/" class=`navbar__link navbar__link--logo ${colored ? 'navbar__link--colored':''}`) Lizzie
 
     ul.navbar__nav
-        +navbarItem("Home", "/", true)
-        +navbarItem("About", "/about")
-        +navbarItem("Blog", "/blog", true)
+        +navbarItem("Home", "/", "Home")
+        +navbarItem("About", "/about", "About")
+        +navbarItem("Blog", "/blog", "Posts")
 
     ul.navbar__toggler
         span.bar
@@ -21,9 +21,9 @@ div.navbar.container.u-padding-mobile
         span.bar
     
     ul.navbar__menu
-        +navbarMenuItem("Home", "/", true)
-        +navbarMenuItem("About", "/about")
-        +navbarMenuItem("Blog", "/blog", true)
+        +navbarMenuItem("Home", "/", "Home")
+        +navbarMenuItem("About", "/about", "About")
+        +navbarMenuItem("Blog", "/blog", "Posts")
         br
         hr
         br

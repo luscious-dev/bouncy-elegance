@@ -31,9 +31,9 @@
   &__text {
     padding-left: 10vw;
 
-    // @include breakpoint-down(920px) {
-    //   padding: 0;
-    // }
+    @include breakpoint-down(600px) {
+      padding: 0;
+    }
   }
 
   &__text-content {

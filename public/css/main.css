@@ -416,6 +416,9 @@ a {
   position: relative;
   z-index: 1;
 }
+.navbar__link:hover, .navbar__link--active {
+  text-decoration: underline;
+}
 .navbar__link--animated::before {
   content: "";
   position: absolute;
@@ -1421,6 +1424,11 @@ a {
 .banner__text {
   padding-left: 10vw;
 }
+@media screen and (max-width: 600px) {
+  .banner__text {
+    padding: 0;
+  }
+}
 .banner__text-content {
   margin-top: -4rem;
 }
@@ -2016,6 +2024,11 @@ a {
   position: relative;
   padding-top: 5rem;
 }
+@media screen and (max-width: 700px) {
+  .about {
+    padding-top: 3rem;
+  }
+}
 .about h1 {
   position: absolute;
   transform-origin: top left;
@@ -2024,8 +2037,27 @@ a {
   font-size: 5rem;
   font-family: "Noto Serif", serif;
 }
+@media screen and (max-width: 700px) {
+  .about h1 {
+    position: static;
+    transform: none;
+    font-size: 4.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .about h1 {
+    font-size: 3.5rem;
+  }
+}
 .about .content {
   margin-left: 100px;
+}
+@media screen and (max-width: 700px) {
+  .about .content {
+    margin-left: 0;
+  }
 }
 .about .content__info {
   display: flex;
@@ -2033,20 +2065,59 @@ a {
   align-items: center;
   margin-bottom: 5rem;
 }
-.about .content__info--1 img {
+@media screen and (max-width: 1080px) {
+  .about .content__info {
+    flex-direction: column;
+  }
+}
+.about .content__info img {
   flex: 1;
   max-width: 47rem;
 }
-.about .content__info--1 .text-content h2 {
+.about .content__info .text-content h2 {
   font-size: 3.8rem;
   font-family: "Noto Serif", serif;
   margin-bottom: 1.8rem;
   font-weight: 100;
 }
-.about .content__info--1 .text-content p {
+@media screen and (max-width: 700px) {
+  .about .content__info .text-content h2 {
+    font-size: 3.5rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .about .content__info .text-content h2 {
+    font-size: 3rem;
+  }
+}
+.about .content__info .text-content p {
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
 }
-.about .content__info--1 .text-content p:not(:last-of-type) {
+@media screen and (max-width: 600px) {
+  .about .content__info .text-content p {
+    font-size: 1.6rem;
+  }
+}
+.about .content__info .text-content p:not(:last-of-type) {
   margin-bottom: 1rem;
+}
+@media screen and (max-width: 1080px) {
+  .about .content__info {
+    gap: 30px;
+  }
+  .about .content__info--2 img {
+    order: 1;
+  }
+  .about .content__info--2 .text-content {
+    order: 2;
+  }
+  .about .content__info .text-content {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .about .content__info {
+    margin-bottom: 8rem;
+  }
 }
