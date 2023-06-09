@@ -12,8 +12,12 @@ process.on("uncaughtException", (err) => {
 });
 
 mongoose.set("strictQuery", true);
+const connectionString =
+  process.env.NODE_ENV == "development"
+    ? process.env.DB_LOCAL
+    : process.env.DB_PROD.replace("<password>", process.env.DB_PASSWORD);
 mongoose
-  .connect(process.env.DB_LOCAL)
+  .connect(connectionString)
   .then((res) => {
     console.log("MONGO CONNECTION SUCCESSFUL");
   })
