@@ -16,6 +16,11 @@ block content
     section.blog-posts
         .container.u-padding-mobile
             h2.heading.heading-primary.heading--gradient Here are some posts
+            - if(posts.length == 0)
+                .no-results.u-mt-medium
+                    svg
+                        use(xlink:href=`img/icons.svg#icon-inbox`)
+                    h2.u-mt-small No posts yet!
             .grid.grid--blog-posts.u-mb-medium
                 each post in posts
                     a.blog-posts__card.home-card(href=`/blog/${post.slug}`)
