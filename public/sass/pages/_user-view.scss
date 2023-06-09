@@ -32,6 +32,11 @@
       fill: $color-primary;
       width: 30px;
       height: 30px;
+
+      @include breakpoint-down(500px) {
+        width: 25px;
+        height: 25px;
+      }
     }
 
     @include breakpoint-down(900px) {
@@ -151,7 +156,7 @@
       padding: 0 4rem;
     }
     @include breakpoint-down(500px) {
-      padding: 0 2rem;
+      padding: 0;
     }
   }
   &__container {

@@ -9,6 +9,10 @@
   border-radius: 5px;
   font-family: "Poppins", sans-serif;
 
+  @include breakpoint-down(500px) {
+    padding: 5rem 4rem;
+  }
+
   .btn,
   .btn:link,
   .btn:visited {
@@ -27,6 +31,10 @@
     /*Add later when we use this for the button in form*/
     border: none;
     cursor: pointer;
+
+    @include breakpoint-down(500px) {
+      padding: 0.8rem 3rem;
+    }
   }
 
   .btn:hover {
@@ -74,6 +82,11 @@
   border-radius: 4px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+
+  @include breakpoint-down(500px) {
+    padding: 1rem 1.25rem;
+    font-size: 1.4rem;
+  }
   /* Pseudo element (a visible thing that isn't really in the DOM).
         Also needs -ms- */
 }
@@ -97,6 +110,10 @@
   font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
+
+  @include breakpoint-down(500px) {
+    font-size: 1.4rem;
+  }
 }
 
 .form__photo-upload {
@@ -139,6 +156,10 @@
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
   cursor: pointer;
+
+  @include breakpoint-down(500px) {
+    font-size: 1.3rem;
+  }
 }
 .form__upload + label:hover {
   background-color: $color-secondary;

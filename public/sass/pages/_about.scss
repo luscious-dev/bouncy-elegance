@@ -26,6 +26,9 @@
     @include breakpoint-down(600px) {
       font-size: 3.5rem;
     }
+    @include breakpoint-down(500px) {
+      font-size: 3rem;
+    }
   }
 
   .content {
@@ -48,6 +51,10 @@
       img {
         flex: 1;
         max-width: 47rem;
+
+        @include breakpoint-down(500px) {
+          max-width: 100%;
+        }
       }
 
       .text-content {
@@ -63,6 +70,9 @@
           @include breakpoint-down(600px) {
             font-size: 3rem;
           }
+          @include breakpoint-down(500px) {
+            font-size: 2.5rem;
+          }
         }
 
         p {
@@ -71,6 +81,9 @@
 
           @include breakpoint-down(600px) {
             font-size: 1.6rem;
+          }
+          @include breakpoint-down(600px) {
+            font-size: 1.5rem;
           }
           &:not(:last-of-type) {
             margin-bottom: 1rem;

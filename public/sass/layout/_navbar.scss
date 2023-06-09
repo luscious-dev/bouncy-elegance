@@ -34,7 +34,6 @@
   }
 
   &__menu {
-    width: 80%;
     position: absolute;
     list-style: none;
     background-color: white;
@@ -49,6 +48,15 @@
     transform: translateY(-200%);
     transition: all 0.3s ease-in-out;
     z-index: 10;
+
+    @include breakpoint-down(700px) {
+      padding: 1.5rem 0;
+
+      .navbar__link {
+        font-size: 1.5rem;
+        padding: 0.6rem 1.8rem;
+      }
+    }
 
     &.open {
       // display: block;

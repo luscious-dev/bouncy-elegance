@@ -29,7 +29,7 @@
     font-size: 1.8rem;
     border-radius: 100px;
 
-    @include breakpoint-down(400px) {
+    @include breakpoint-down(500px) {
       padding: 1.6rem 5rem;
       font-size: 1.6rem;
     }
@@ -38,6 +38,11 @@
     padding: 1.25rem 3rem !important;
     font-size: 1.4rem !important;
     border-radius: 100px;
+
+    @include breakpoint-down(500px) {
+      padding: 1.05rem 2.5rem !important;
+      font-size: 1.2rem !important;
+    }
   }
 
   &--large-outlined {

@@ -65,6 +65,10 @@ a {
   margin-bottom: 2rem;
   text-transform: uppercase;
   font-weight: 700;
+
+  @include breakpoint-down(500px) {
+    font-size: 2rem;
+  }
 }
 
 .heading-tertiary {

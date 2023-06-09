@@ -49,7 +49,12 @@ main {
 }
 
 .u-padding-mobile {
-  padding: 0 30px;
+  padding: 0;
+}
+@media screen and (max-width: 600px) {
+  .u-padding-mobile {
+    padding: 0 30px;
+  }
 }
 
 .u-truncate-inline {
@@ -280,6 +285,11 @@ a {
   text-transform: uppercase;
   font-weight: 700;
 }
+@media screen and (max-width: 500px) {
+  .heading-secondary {
+    font-size: 2rem;
+  }
+}
 
 .heading-tertiary {
   font-size: 2.75rem;
@@ -375,7 +385,6 @@ a {
   }
 }
 .navbar__menu {
-  width: 80%;
   position: absolute;
   list-style: none;
   background-color: white;
@@ -389,6 +398,15 @@ a {
   transform: translateY(-200%);
   transition: all 0.3s ease-in-out;
   z-index: 10;
+}
+@media screen and (max-width: 700px) {
+  .navbar__menu {
+    padding: 1.5rem 0;
+  }
+  .navbar__menu .navbar__link {
+    font-size: 1.5rem;
+    padding: 0.6rem 1.8rem;
+  }
 }
 .navbar__menu.open {
   transform: translateY(0);
@@ -505,10 +523,15 @@ a {
   color: var(--color-dark);
   font-family: "Poppins", sans-serif;
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
+  .footer {
+    padding: 4.5rem 0;
+  }
+}
+@media screen and (max-width: 500px) {
   .footer > div {
     flex-direction: column;
-    gap: 30px;
+    gap: 15px;
   }
 }
 .footer__column {
@@ -529,10 +552,20 @@ a {
   font-size: 2rem;
   color: inherit;
 }
+@media screen and (max-width: 500px) {
+  .footer__links a {
+    font-size: 1.6rem;
+  }
+}
 .footer__logo {
   font-weight: 600;
   font-size: 3rem;
   margin-top: 2rem;
+}
+@media screen and (max-width: 500px) {
+  .footer__logo {
+    margin-top: 1rem;
+  }
 }
 .footer__text {
   font-size: 1.5rem;
@@ -550,6 +583,11 @@ a {
   flex-basis: 100%;
   outline: none;
 }
+@media screen and (max-width: 500px) {
+  .footer .email-input input[type=text] {
+    padding: 13px 15px 13px;
+  }
+}
 .footer .email-input button {
   background: var(--color-primary);
   color: #fff;
@@ -557,9 +595,10 @@ a {
   cursor: pointer;
   margin: 0;
   border: none;
+  flex-basis: 80px;
 }
 .footer .email-input button svg {
-  width: 3rem;
+  width: 100%;
   height: 3rem;
   fill: var(--color-light);
 }
@@ -567,8 +606,17 @@ a {
 .footer-meta {
   padding: 2rem 0;
   background-color: var(--color-grey-light-1);
-  font-size: 1.5rem;
   font-family: "Poppins", sans-serif;
+}
+.footer-meta p,
+.footer-meta a {
+  font-size: 1.5rem;
+}
+@media screen and (max-width: 500px) {
+  .footer-meta p,
+  .footer-meta a {
+    font-size: 1.3rem;
+  }
 }
 .footer-meta__links {
   list-style: none;
@@ -624,7 +672,7 @@ a {
   font-size: 1.8rem;
   border-radius: 100px;
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .btn--large {
     padding: 1.6rem 5rem;
     font-size: 1.6rem;
@@ -634,6 +682,12 @@ a {
   padding: 1.25rem 3rem !important;
   font-size: 1.4rem !important;
   border-radius: 100px;
+}
+@media screen and (max-width: 500px) {
+  .btn--small {
+    padding: 1.05rem 2.5rem !important;
+    font-size: 1.2rem !important;
+  }
 }
 .btn--large-outlined {
   padding: 1rem 6rem;
@@ -731,6 +785,13 @@ a {
   padding: 1.6rem 15rem;
   -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+  width: 80%;
+}
+@media screen and (max-width: 500px) {
+  .alert {
+    font-size: 1.4rem;
+    padding: 1.6rem 2rem;
+  }
 }
 .alert--success {
   background-color: #ff218c;
@@ -1105,8 +1166,14 @@ a {
 .hero__primary {
   margin-bottom: 33px;
 }
+@media screen and (max-width: 500px) {
+  .hero__primary {
+    text-shadow: 1px 3px rgba(0, 0, 0, 0.4);
+  }
+}
 .hero__description {
   margin-bottom: 4rem;
+  color: #734747;
 }
 .hero__img-box {
   flex: 0 0 35%;
@@ -1336,6 +1403,12 @@ a {
 .reviews-section .review:hover {
   transform: translateY(-1rem);
   box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.2);
+}
+@media screen and (max-width: 700px) {
+  .reviews-section .review:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }
 
 .blog-section {
@@ -1632,6 +1705,12 @@ a {
   border-radius: 5px;
   font-family: "Poppins", sans-serif;
 }
+@media screen and (max-width: 500px) {
+  .login-form,
+  .sign-up {
+    padding: 5rem 4rem;
+  }
+}
 .login-form .btn,
 .login-form .btn:link,
 .login-form .btn:visited,
@@ -1653,6 +1732,16 @@ a {
   /*Add later when we use this for the button in form*/
   border: none;
   cursor: pointer;
+}
+@media screen and (max-width: 500px) {
+  .login-form .btn,
+  .login-form .btn:link,
+  .login-form .btn:visited,
+  .sign-up .btn,
+  .sign-up .btn:link,
+  .sign-up .btn:visited {
+    padding: 0.8rem 3rem;
+  }
 }
 .login-form .btn:hover,
 .sign-up .btn:hover {
@@ -1701,6 +1790,12 @@ a {
   /* Pseudo element (a visible thing that isn't really in the DOM).
         Also needs -ms- */
 }
+@media screen and (max-width: 500px) {
+  .form__input {
+    padding: 1rem 1.25rem;
+    font-size: 1.4rem;
+  }
+}
 
 .form__input:focus {
   outline: none;
@@ -1724,6 +1819,11 @@ a {
   font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
+}
+@media screen and (max-width: 500px) {
+  .form__label {
+    font-size: 1.4rem;
+  }
 }
 
 .form__photo-upload {
@@ -1766,6 +1866,11 @@ a {
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
   cursor: pointer;
+}
+@media screen and (max-width: 500px) {
+  .form__upload + label {
+    font-size: 1.3rem;
+  }
 }
 
 .form__upload + label:hover {
@@ -1851,6 +1956,12 @@ a {
   fill: #ff218c;
   width: 30px;
   height: 30px;
+}
+@media screen and (max-width: 500px) {
+  .user-view__menu-toggle svg {
+    width: 25px;
+    height: 25px;
+  }
 }
 @media screen and (max-width: 900px) {
   .user-view__menu-toggle {
@@ -1954,7 +2065,7 @@ a {
 }
 @media screen and (max-width: 500px) {
   .user-view__form-container {
-    padding: 0 2rem;
+    padding: 0;
   }
 }
 .user-view__container {
@@ -2051,6 +2162,11 @@ a {
     font-size: 3.5rem;
   }
 }
+@media screen and (max-width: 500px) {
+  .about h1 {
+    font-size: 3rem;
+  }
+}
 .about .content {
   margin-left: 100px;
 }
@@ -2074,6 +2190,11 @@ a {
   flex: 1;
   max-width: 47rem;
 }
+@media screen and (max-width: 500px) {
+  .about .content__info img {
+    max-width: 100%;
+  }
+}
 .about .content__info .text-content h2 {
   font-size: 3.8rem;
   font-family: "Noto Serif", serif;
@@ -2090,6 +2211,11 @@ a {
     font-size: 3rem;
   }
 }
+@media screen and (max-width: 500px) {
+  .about .content__info .text-content h2 {
+    font-size: 2.5rem;
+  }
+}
 .about .content__info .text-content p {
   font-family: "Poppins", sans-serif;
   font-size: 1.8rem;
@@ -2097,6 +2223,11 @@ a {
 @media screen and (max-width: 600px) {
   .about .content__info .text-content p {
     font-size: 1.6rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .about .content__info .text-content p {
+    font-size: 1.5rem;
   }
 }
 .about .content__info .text-content p:not(:last-of-type) {

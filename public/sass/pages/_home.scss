@@ -38,10 +38,15 @@
 
   &__primary {
     margin-bottom: 33px;
+
+    @include breakpoint-down(500px) {
+      text-shadow: 1px 3px rgba(0, 0, 0, 0.4);
+    }
   }
 
   &__description {
     margin-bottom: 4rem;
+    color: #734747;
   }
 
   &__img-box {
@@ -301,6 +306,13 @@
     &:hover {
       transform: translateY(-1rem);
       box-shadow: 0 2rem 3rem rgba(black, 0.2);
+    }
+
+    @include breakpoint-down(700px) {
+      &:hover {
+        transform: none;
+        box-shadow: none;
+      }
     }
   }
 }

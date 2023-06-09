@@ -2,6 +2,7 @@ const AppError = require("../utils/appError");
 
 const handleDevError = (err, req, res) => {
   // API
+  console.log(err);
   if (req.originalUrl.startsWith("/api")) {
     res.status(err.statusCode).json({
       status: err.status,
@@ -71,7 +72,6 @@ const handleDuplicateErrorDB = (err) => {
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
-  console.log(err);
 
   if (process.env.NODE_ENV == "development") {
     handleDevError(err, req, res);
