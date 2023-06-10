@@ -6,11 +6,7 @@
 }
 
 .u-padding-mobile {
-  padding: 0;
-
-  @include breakpoint-down(600px) {
-    padding: 0 30px;
-  }
+  padding: 0 30px;
 }
 .u-truncate-inline {
   white-space: nowrap;

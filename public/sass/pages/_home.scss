@@ -38,6 +38,13 @@
 
   &__primary {
     margin-bottom: 33px;
+    transform: translateY(-100%);
+    opacity: 0;
+
+    &.animate {
+      animation: slide-in-top 400ms ease-in;
+      animation-fill-mode: forwards;
+    }
 
     @include breakpoint-down(500px) {
       text-shadow: 1px 3px rgba(0, 0, 0, 0.4);
@@ -47,6 +54,14 @@
   &__description {
     margin-bottom: 4rem;
     color: #734747;
+
+    transform: translateX(-100%);
+    opacity: 0;
+
+    &.animate {
+      animation: slide-in-left 400ms ease-in;
+      animation-fill-mode: forwards;
+    }
   }
 
   &__img-box {
@@ -54,6 +69,16 @@
 
     @include breakpoint-down(700px) {
       display: none;
+    }
+  }
+
+  .btn {
+    transform: translateY(-100%);
+    opacity: 0;
+
+    &.animate {
+      animation: slide-in-top 400ms ease-in 400ms;
+      animation-fill-mode: forwards;
     }
   }
 
@@ -67,6 +92,25 @@
   background-color: var(--color-grey-light-1);
   padding: 8rem 0;
   position: relative;
+  .heading {
+    transform: translateY(-100%);
+    opacity: 0;
+
+    &.animate {
+      animation: slide-in-top 400ms ease-in;
+      animation-fill-mode: forwards;
+    }
+
+    & + p {
+      transform: translateX(-100%);
+      opacity: 0;
+
+      &.animate {
+        animation: slide-in-left 400ms ease-in;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
   .products {
     // display: flex;
     // justify-content: space-between;
@@ -129,6 +173,14 @@
       overflow: hidden;
       box-shadow: 0 1rem 3rem rgba($color-dark, 0.3);
 
+      transform: scale(0);
+      opacity: 0;
+
+      &.animate {
+        animation: scale-in 400ms ease-in 400ms;
+        animation-fill-mode: forwards;
+      }
+
       .field {
         font-weight: bold;
         color: var(--color-primary);
@@ -167,6 +219,7 @@
 .quote-section {
   padding: 8rem 0;
   background-color: var(--color-grey-light-1);
+
   .quotation {
     display: flex;
     justify-content: space-between;
@@ -188,6 +241,13 @@
     &__text {
       max-width: 50%;
       font-family: "Poppins", sans-serif;
+      transform: translateX(-100%);
+      opacity: 0;
+
+      &.animate {
+        animation: slide-in-left 400ms ease-in 400ms;
+        animation-fill-mode: forwards;
+      }
 
       @include breakpoint-down(770px) {
         order: 2;
@@ -237,6 +297,13 @@
     // Image half
     &__image {
       max-width: 515px;
+      transform: translateX(100%);
+      opacity: 0;
+
+      &.animate {
+        animation: slide-in-right 400ms ease-in 400ms;
+        animation-fill-mode: forwards;
+      }
 
       figure,
       img {
@@ -254,6 +321,26 @@
 .reviews-section {
   background-color: var(--color-primary);
   padding: 8rem 0;
+
+  .heading {
+    transform: translateY(-100%);
+    opacity: 0;
+
+    &.animate {
+      animation: slide-in-top 400ms ease-in;
+      animation-fill-mode: forwards;
+    }
+
+    & + p {
+      transform: translateX(-100%);
+      opacity: 0;
+
+      &.animate {
+        animation: slide-in-left 400ms ease-in;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
 
   h2:first-of-type {
     color: var(--color-light);
@@ -321,6 +408,26 @@
   padding: 8rem 0;
   background-color: var(--color-grey-light-1);
 
+  .heading {
+    transform: translateY(-100%);
+    opacity: 0;
+
+    &.animate {
+      animation: slide-in-top 400ms ease-in;
+      animation-fill-mode: forwards;
+    }
+
+    & + p {
+      transform: translateX(-100%);
+      opacity: 0;
+
+      &.animate {
+        animation: slide-in-left 400ms ease-in;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+
   & > div > div {
     @include breakpoint-down(900px) {
       order: 1;
@@ -335,13 +442,32 @@
     max-width: 585px;
     margin-right: 3rem;
 
+    transform: translateX(-100%);
+    opacity: 0;
+
+    &.animate {
+      animation: slide-in-left 400ms ease-in 400ms;
+      animation-fill-mode: forwards;
+    }
     img {
       width: 100%;
+    }
+
+    @include breakpoint-down(900px) {
+      margin-right: 0;
     }
   }
 
   .preview-blog-posts {
     flex: 0 1 550px;
+
+    transform: translateX(100%);
+    opacity: 0;
+
+    &.animate {
+      animation: slide-in-right 400ms ease-in 400ms;
+      animation-fill-mode: forwards;
+    }
 
     @include breakpoint-down(900px) {
       flex-basis: 0;
@@ -359,7 +485,7 @@
     &__title {
       font-size: 2.3rem;
 
-      @include breakpoint-down(400px) {
+      @include breakpoint-down(500px) {
         font-size: 1.8rem;
       }
     }
@@ -368,7 +494,7 @@
       color: var(--color-primary);
       font-size: 1.8rem;
 
-      @include breakpoint-down(400px) {
+      @include breakpoint-down(500px) {
         font-size: 1.4rem;
       }
     }

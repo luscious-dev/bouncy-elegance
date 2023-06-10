@@ -1,7 +1,7 @@
 extends base
 
 mixin productItem(type, name, image="/img/DSC08630.jpg", sizes="A, B, C, D, E")
-    .products__item
+    .products__item.animateable
         .products__image
             img(src="/img/boobs.jpg"  alt="Prosthesis")
         .products__description
@@ -29,10 +29,10 @@ block content
 
         .hero__content.container.u-padding-mobile
             .hero__text-box
-                h1.hero__primary This should be some catch phrase
-                p.hero__description
+                h1.hero__primary.animateable This should be some catch phrase
+                p.hero__description.animateable
                     | Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid soluta repellat dignissimos et error voluptate
-                a.btn.btn--primary.btn--large.btn--animated(href="#products")
+                a.btn.btn--primary.btn--large.btn--animated.animateable(href="#products")
                     | View Products
             .hero__img-box
                 //- img.hero__img(src="/img/blog-post/13.jpg" alt="Prosthesis")
@@ -40,9 +40,9 @@ block content
 
     section.products-section#products
         .container.u-padding-mobile
-            h2.heading.heading-primary.heading--gradient.u-center Variety of Sizes Available
+            h2.heading.heading-primary.heading--gradient.u-center.animateable Variety of Sizes Available
 
-            p.heading-description--primary.paragraph-centered.u-mb-big
+            p.heading-description--primary.paragraph-centered.u-mb-big.animateable
                 | The most comfortable and affordable sets of prosthesis you can find available for a variety of breast type.
             .products__badge
                 .badge__content
@@ -63,7 +63,7 @@ block content
     section.quote-section
         .container.u-padding-mobile
             .quotation
-                .quotation__text
+                .quotation__text.animateable
                     blockquote
                         p
                             | &ldquo;I created this platform as a means to provide breast cancer survivors based in Nigeria a way to obtain prosthesis at affordable prices.&rdquo;
@@ -73,13 +73,13 @@ block content
 
                     a.btn.btn--large-outlined.btn--outlined.u-uppercase(href="/about") About Me
 
-                .quotation__image
+                .quotation__image.animateable
                     figure
                         img(src="/img/DSC08702.png" alt="founder img")
 
     section.reviews-section
         .container.u-padding-mobile
-            h2.heading.heading-primary.u-center.u-mb-big
+            h2.heading.heading-primary.u-center.u-mb-big.animateable
                 | We Satisfy our customers
             .reviews-grid
                 +reviewItem("Chiamaka Ngozi","By far the best prosthesis I've ever bought. Not too heavy and very durable")
@@ -88,15 +88,15 @@ block content
     - if(posts.length != 0)          
         section.blog-section
             .container.u-padding-mobile
-                h1.heading.heading-primary.heading--gradient.u-mb-small
-                    | Check out my latest blog post
-                p.text--big.u-mb-medium
+                h1.heading.heading-primary.heading--gradient.u-mb-small.animateable
+                    | Check out my latest blog post.
+                p.text--big.u-mb-medium.animateable
                     | There are lots of content for you. From educational contents to life advices.
 
                 .u-d-flex.u-d-flex-justify-sb.u-d-flex-align-ct
-                    .preview-image
+                    .preview-image.animateable
                         img(src=`/img/blog-post/${posts[0].photo}`, alt="Latest post photo")
-                    .preview-blog-posts
+                    .preview-blog-posts.animateable
                         - for(let i=0; i < 2; i++){
                             - if(posts[i])
                                 .blog-post

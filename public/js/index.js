@@ -49,6 +49,24 @@ const settingsMenu = document.querySelector(".user-view__menu-toggle");
 const settingsSideNav = document.querySelector(".user-view__menu");
 const navMenuLogout = document.querySelector("#navbar-menu__logout");
 
+const animateable = document.querySelectorAll(".animateable");
+
+const intersectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      // Add a class or apply any styles to start the animation
+      entry.target.classList.add("animate");
+    } else {
+      // Remove the class or reset styles if needed
+      entry.target.classList.remove("animate");
+    }
+  });
+});
+
+animateable.forEach((element) => {
+  intersectionObserver.observe(element);
+});
+
 if (settingsMenu) {
   settingsMenu.addEventListener("click", (e) => {
     e.preventDefault();
@@ -58,6 +76,7 @@ if (settingsMenu) {
 }
 
 navToggler.addEventListener("click", (e) => {
+  navToggler.classList.toggle("active");
   navMenu.classList.toggle("open");
 });
 
